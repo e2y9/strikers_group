@@ -13,13 +13,19 @@ public class TopTrumpsCLIApplication {
 	public static void main(String[] args) {
 
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
-		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
+		
+		// the args[0] if statement is commented-out so the program will run in the eclipse console
+		
+//		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
 
 		// State
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
 
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
+
+			System.out.println("Welcome to Top Trumps!");
+			System.out.println("This is a test print to the console.");
 
 			// ----------------------------------------------------
 			// Add your game logic here based on the requirements
