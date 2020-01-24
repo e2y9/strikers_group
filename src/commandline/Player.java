@@ -9,6 +9,7 @@ interface Player {
 	  public void getCardTotal();
 	  public void setCardTotal();
 	  public void addCard();
+	  public void incrementCardTotal();
 
 	}
 

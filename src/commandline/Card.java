@@ -19,8 +19,10 @@ public class Card {
 	  }
 
 	  public String toString() {
-	    String card = String.format("%s : %s %s %s %s %s", getName(),
-	    getIntelligence(), getSpeed(), getStrength(), getAgility(), getFighting());
+	    String card = String.format("%n%nName: %s %n%s : %d %n%s : %d %n%s : %d %n%s : %d %n%s : %d", 
+	    		getName(), getCategoryIntelligence(), getIntelligence(),
+	    		getCategorySpeed(), getSpeed(), getCategoryStrength(), getStrength(),
+	    		getCategoryAgility(), getAgility(), getCategoryFighting(), getFighting());
 	    return card;
 	  }
 
@@ -47,14 +49,34 @@ public class Card {
 	  public int getFighting() {
 	    return this.cardValues[4];
 	  }
+	  
+	  public String getCategoryIntelligence() {
+	    return this.cardCategories[0];
+	  }
 
-	  public void fillCard(String name, int i, int sp, int st, int a, int f) {
+	  public String getCategorySpeed() {
+	    return this.cardCategories[1];
+	  }
+
+	  public String getCategoryStrength() {
+	    return this.cardCategories[2];
+	  }
+
+	  public String getCategoryAgility() {
+	    return this.cardCategories[3];
+	  }
+
+	  public String getCategoryFighting() {
+	    return this.cardCategories[4];
+	  }
+
+	  public void fillCard(String name, int intelligence, int speed, int strength, int agility, int fighting) {
 	    this.name = name;
-	    this.cardValues[0] = i;
-	    this.cardValues[1] = sp;
-	    this.cardValues[2] = st;
-	    this.cardValues[3] = a;
-	    this.cardValues[4] = f;
+	    this.cardValues[0] = intelligence;
+	    this.cardValues[1] = speed;
+	    this.cardValues[2] = strength;
+	    this.cardValues[3] = agility;
+	    this.cardValues[4] = fighting;
 	  }
 
 

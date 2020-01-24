@@ -86,6 +86,9 @@ public class Deck {
 
 
 	  public void dealDeck() {
+		  // int cardCount = 0;
+		  // while cardCount < 40\
+		  // for player in player list : player.addCard(deck.getCard(cardCount))
 
 	  }
 

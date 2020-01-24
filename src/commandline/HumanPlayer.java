@@ -25,12 +25,16 @@ public class HumanPlayer implements Player {
 		  
 	  };
 	  
-	  public void setCardTotal() {
-		  
+	  public void incrementCardTotal() {
+		  this.cardTotal++;
 	  };
 	  
 	  public void addCard() {
 		  
 	  };
+	  
+	  public void setCardTotal() {
+		  
+	  }
 
 	}
