@@ -10,6 +10,8 @@ public class HumanPlayer implements Player {
 
 
 	  public HumanPlayer() {
+		  
+		  this.playerCards = new Card[40];
 
 	  }
 
@@ -29,7 +31,8 @@ public class HumanPlayer implements Player {
 		  this.cardTotal++;
 	  };
 	  
-	  public void addCard() {
+	  public void addCard(int i) {
+//		  playerCards[i] = ;
 		  
 	  };
 	  

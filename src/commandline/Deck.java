@@ -84,11 +84,15 @@ public class Deck {
 	    return cardDeck[i];
 	  }
 
+	  public void shuffleDeck() {
+
+	  }
 
 	  public void dealDeck() {
+		  // work with addCard in player class
 		  // int cardCount = 0;
 		  // while cardCount < 40\
-		  // for player in player list : player.addCard(deck.getCard(cardCount))
+		  // for (int i = 0; i < 5; i++) { playerList[i].addCard(cardDeck[cardCount]) }
 
 	  }
 
@@ -105,9 +109,6 @@ public class Deck {
 	    this.playerList[i] = p;
 	  }
 
-	  public void shuffle() {
-
-	  }
 
 
 	}
