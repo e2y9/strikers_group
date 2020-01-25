@@ -10,8 +10,14 @@ public class CompPlayer implements Player {
 
 
 	  public CompPlayer() {
+		  this.playerCards = new Card[40];
 
 	  }
+	  
+	  public Card[] getPlayerCards() {
+		  return playerCards;
+	  }
+
 
 	  public void getName() {
 		  
@@ -27,7 +33,14 @@ public class CompPlayer implements Player {
 	  
 	  public void setCardTotal() {
 		  
-	  };
+	  }
+
+
+	@Override
+	public void incrementCardTotal() {
+		// TODO Auto-generated method stub
+		
+	};
 
 	}
 
