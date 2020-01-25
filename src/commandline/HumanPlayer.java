@@ -36,6 +36,7 @@ public class HumanPlayer implements Player {
 		  return catNum;
 	  }
 	  
+	  
 	  public Card[] getPlayerCards() {
 		  return playerCards;
 	  }

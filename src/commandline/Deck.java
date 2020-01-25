@@ -10,6 +10,7 @@ public class Deck {
 	  Card[] cardDeck;
 	  Card[] commonPile;
 	  Player[] playerList;
+	  Player categoryChooser;
 
 	  Card card0, card1, card2, card3, card4, card5, card6, card7,
 	  card8, card9, card10, card11, card12, card13, card14, card15,
@@ -23,6 +24,7 @@ public class Deck {
 		cardDeck = new Card[40];
 		commonPile = new Card[40];
 		playerList = new Player[5];
+		Player categoryChooser = p1;
 		
 	    this.playerList[0] = p1;
 	    this.playerList[1] = p2;
@@ -126,6 +128,14 @@ public class Deck {
 			  commonPile[rdmIndexPos] = commonPile[i];
 			  commonPile[i] = temp;
 		  }
+	  }
+	  
+	  public Player getCategoryChooser() {
+		  return categoryChooser;
+	  }
+	  
+	  public void setCategoryChooser(Player p) {
+		  categoryChooser = p;
 	  }
 	  
 	  public void assignCommonPile() {

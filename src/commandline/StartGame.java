@@ -4,15 +4,25 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class StartGame {
+    Player human;
+    Player comp1;
+    Player comp2;
+    Player comp3;
+    Player comp4;
+    Player dealer;
+    Player currentWinner;
+    Deck deck;
+    
 	
 	
 	public StartGame() {
-	    Player human = new HumanPlayer();
-	    Player comp1 = new CompPlayer();
-	    Player comp2 = new CompPlayer();
-	    Player comp3 = new CompPlayer();
-	    Player comp4 = new CompPlayer();
-	    Deck deck = new Deck(human, comp1, comp2, comp3, comp4);
+	    human = new HumanPlayer();
+	    comp1 = new CompPlayer();
+	    comp2 = new CompPlayer();
+	    comp3 = new CompPlayer();
+	    comp4 = new CompPlayer();
+	    dealer = new CompPlayer();
+	    deck = new Deck(human, comp1, comp2, comp3, comp4);
 
 	    try {
 	    	// file address is set to Emmet's computer - change url below for own machine
