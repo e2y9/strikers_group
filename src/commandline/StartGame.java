@@ -21,6 +21,7 @@ public class StartGame {
 	    }catch (FileNotFoundException e) {
 	      System.out.print("File not found.");
 	    }
+	    deck.shuffleDeck();
 	    deck.dealDeck();
 	    // Testing main card deck and player's own decks to prove dealDeck works
 	    System.out.print("\n\nPrint first card in deck:");
@@ -31,6 +32,7 @@ public class StartGame {
 	    System.out.print(deck.getPlayerList()[1].getPlayerCards()[7].toString());
 	    System.out.print("\n\nPrint Player 5's third card:");
 	    System.out.print(deck.getPlayerList()[4].getPlayerCards()[3].toString());
+	    
 		
 	}
 
