@@ -25,6 +25,7 @@ public class Card {
 		    this.cardValues[3] = agility;
 		    this.cardValues[4] = combat;
 		  }
+	  
 
 	  public String toString() {
 	    String card = String.format("%n%nName: %s %n%-13s : %d %n%-13s : %d %n%-13s : %d %n%-13s : %d %n%-13s : %d", 

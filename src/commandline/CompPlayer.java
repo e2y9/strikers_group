@@ -31,13 +31,14 @@ public class CompPlayer implements Player {
 		 categoryArray[2] = strength;
 		 categoryArray[3] = agility;
 		 categoryArray[4] =	combat;
+		 int position = 1;
 		 int max = categoryArray[0];		 
-		 for (int i = 1; i < categoryArray.length; i++) {
-			 if (categoryArray[i] > max) {
-				 max = categoryArray[i];
+		 for (position = 1; position < categoryArray.length; position++) {
+			 if (categoryArray[position] > max) {
+				 max = categoryArray[position];
 			 }
 		 }
-		 return max;
+		 return position;
 		  
 	  };
 	  
@@ -59,6 +60,10 @@ public class CompPlayer implements Player {
 		  }
 		  return arrayPos;
 		 
+	  }
+	  
+	  public String displayCurrentCard() {
+		  return this.currentCard.toString();
 	  }
 	  
 	  public Card getCurrentCard() {

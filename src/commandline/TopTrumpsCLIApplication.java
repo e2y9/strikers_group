@@ -23,14 +23,16 @@ public class TopTrumpsCLIApplication {
 
 		// State
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
-
+		
+		System.out.print("\nWelcome to Top Trumps!\n");	
+		StartGame game = new StartGame();
+		int counter = 1;
 		// Loop until the user wants to exit the game
-		while (!userWantsToQuit) {
-
-			System.out.print("\nWelcome to Top Trumps!\n");	
-			StartGame newGame = new StartGame();
-			
-			userWantsToQuit=true; // use this when the user wants to exit the game
+		while ((!userWantsToQuit) || (counter < 3)) {
+			StartRound startRound = new StartRound();
+			EndRound endRound = new EndRound();
+			counter++;
+//			userWantsToQuit=true; // use this when the user wants to exit the game
 
 		}
 

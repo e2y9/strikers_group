@@ -24,7 +24,7 @@ public class Deck {
 		cardDeck = new Card[40];
 		commonPile = new Card[40];
 		playerList = new Player[5];
-		Player categoryChooser = p1;
+		categoryChooser = p1;
 		
 	    this.playerList[0] = p1;
 	    this.playerList[1] = p2;

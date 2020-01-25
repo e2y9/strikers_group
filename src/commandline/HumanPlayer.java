@@ -19,12 +19,13 @@ public class HumanPlayer implements Player {
 	  public int chooseCategory() {
 		  int catNum = 0;
 		  try {
-			  System.out.println("What category would you like to choose?");
+			  System.out.printf("%n%nWhat category would you like to choose?%n");
 			  System.out.println("1 - Intelligence");
 			  System.out.println("2 - Speed");
 			  System.out.println("3 - Strength");
 			  System.out.println("4 - Agility");
 			  System.out.println("5 - Combat");
+			  System.out.println("");
 			  Scanner s = new Scanner(System.in);
 			  String category = s.nextLine();
 			  catNum = Integer.parseInt(category);
@@ -63,6 +64,10 @@ public class HumanPlayer implements Player {
 		  }
 		  return arrayPos;
 		 
+	  }
+	  
+	  public String displayCurrentCard() {
+		  return this.currentCard.toString();
 	  }
 	  
 	  

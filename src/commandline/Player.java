@@ -12,6 +12,8 @@ interface Player {
 	  public int chooseCategory();
 	  public void updateCurrentCard();
 	  public int findArrayPosition();
+	  public String displayCurrentCard();
+	  }
 
 	}
 

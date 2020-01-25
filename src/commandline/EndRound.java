@@ -2,10 +2,14 @@ package commandline;
 
 public class EndRound extends StartGame {
 	boolean commonPileRequired;
+	int roundNumber;
 	
 	public EndRound() {
 		super();
-		
+		findWinner();
+		displayWinningCard();
+		assignRoundCards();
+		updateAllCurrentCards();
 	}
 	
 	public Player getCurrentWinner() {
@@ -16,64 +20,76 @@ public class EndRound extends StartGame {
 		currentWinner = p;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		return (this == o);
+	}
+
+	
 	public void findWinner() {
 		Player chooser = getDeck().getCategoryChooser();
-		int chosenCategory = 5; // initialised with 5 (out of bounds) to test the if statements below for errors
-		// check who chooser is
-		if (chooser == human) {
-			chosenCategory = getHuman().chooseCategory(); // this will trigger a System.in user input request
-		} else if (chooser == comp1) {
-			chosenCategory = getComp1().chooseCategory(); // all comps trigger the comp category chooser method
-		} else if (chooser == comp2) {
-			chosenCategory = getComp2().chooseCategory();
-		} else if (chooser == comp3) {
-			chosenCategory = getComp3().chooseCategory();
-		} else if (chooser == comp4) {
-			chosenCategory = getComp4().chooseCategory();
-		} 
+		System.out.println(getDeck().getCategoryChooser().getName());
+		int chosenCategory = chooser.chooseCategory();
 		
-//		assign chosen category values to each player
+//		assign chosen category values to separate player ints
 		int humanValue = getHuman().getCurrentCard().getValues()[chosenCategory];
 		int comp1Value = getComp1().getCurrentCard().getValues()[chosenCategory];
 		int comp2Value = getComp2().getCurrentCard().getValues()[chosenCategory];
 		int comp3Value = getComp3().getCurrentCard().getValues()[chosenCategory];
 		int comp4Value = getComp4().getCurrentCard().getValues()[chosenCategory];
 		
+		System.out.println(humanValue);
+		System.out.println(comp1Value);
+		System.out.println(comp2Value);
+		System.out.println(comp3Value);
+		System.out.println(comp4Value);
 		
-		// check which player has the highest value and return that player
+		// check which player has the highest value 
 		// also update who the currentChooser is based on who wins the round
+		// keep track of whether the commonPile was req. for the end of the assignRoundCards method
 		if ((humanValue > comp1Value) && (humanValue > comp2Value) 
 				&& (humanValue > comp3Value) && (humanValue > comp4Value)) {
+			System.out.print("human");
 			commonPileRequired = false;
-			deck.setCategoryChooser(human);
-			setCurrentWinner(human);
+			deck.setCategoryChooser(getHuman());
+			setCurrentWinner(getHuman());
 		} else if ((comp1Value > humanValue) && (comp1Value > comp2Value) 
 				&& (comp1Value > comp3Value) && (comp1Value > comp4Value)) {
+			System.out.print("comp1");
 			commonPileRequired = false;
-			deck.setCategoryChooser(comp1);
-			setCurrentWinner(comp1);
+			deck.setCategoryChooser(getComp1());
+			setCurrentWinner(getComp1());
 		} else if ((comp2Value > humanValue) && (comp2Value > comp1Value) 
 				&& (comp2Value > comp3Value) && (comp2Value > comp4Value)) {
+			System.out.print("comp2");
 			commonPileRequired = false;
-			deck.setCategoryChooser(comp2);
-			setCurrentWinner(comp2);
+			deck.setCategoryChooser(getComp2());
+			setCurrentWinner(getComp2());
 		} else if ((comp3Value > humanValue) && (comp3Value > comp1Value) 
 				&& (comp3Value > comp2Value) && (comp3Value > comp4Value)) {
+			System.out.print("comp3");
 			commonPileRequired = false;
-			deck.setCategoryChooser(comp3);
-			setCurrentWinner(comp3);
+			deck.setCategoryChooser(getComp3());
+			setCurrentWinner(getComp3());
 		} else if ((comp4Value > humanValue) && (comp4Value > comp1Value) 
 				&& (comp4Value > comp2Value) && (comp4Value > comp3Value)) {
+			System.out.print("comp4");
 			commonPileRequired = false;
-			deck.setCategoryChooser(comp4);
-			setCurrentWinner(comp4);
+			deck.setCategoryChooser(getComp4());
+			setCurrentWinner(getComp4());
 		} else { commonPileRequired = true; setCurrentWinner(dealer);}
 	}
 	
-	public void assignDealerCards() {
-		
-//		same but with dealer cards loaded into an array and then loaded into new array
+	// DISPLAY showing incorrect card
+	// TESTING REQUIRED
+	public void displayWinningCard() {
+		if (!commonPileRequired) {
+			System.out.println(getCurrentWinner().getName() + "\n\n");
+			System.out.printf("%nWinning card:%n" + getCurrentWinner().getCurrentCard().toString());
+		} else { System.out.println("The round was a draw. Cards added to the common pile.");
+			}
 	}
+	
 	
 	public void assignRoundCards() {
 		int arrayPos = 100; // 100 set as it is out of bounds (testing if stmnt)
@@ -148,6 +164,14 @@ public class EndRound extends StartGame {
 				}
 			}
 		}
+	
+	public void updateAllCurrentCards() {
+		human.updateCurrentCard();
+		comp1.updateCurrentCard();
+		comp2.updateCurrentCard();
+		comp3.updateCurrentCard();
+		comp4.updateCurrentCard();
+	}
 	
     public Player getHuman() {
     	return human;
