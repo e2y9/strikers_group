@@ -1,6 +1,8 @@
 package commandline;
 
 import java.io.FileReader;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Deck {
@@ -96,16 +98,27 @@ public class Deck {
 
 	  }
 
-	  public void addCardDeck() {
-
-	// load cards into deck
-	  }
-
+	  // may not need this - Emmet
+//	  public void addCardDeck() {
+//
+//	// load cards into deck
+//	  }
+	  
+	  
+	  // may not need this - Emmet
 	  public void addPlayer(Player p, int i) {
 	    this.playerList[i] = p;
 	  }
 
-	  public void shuffle() {
+	  public void shuffleDeck() {
+		  Random rdm = new Random();	
+			for (int i = 0; i < cardDeck.length; i++) {
+				int rdmIndexPos = rdm.nextInt(cardDeck.length);
+				Card temp = cardDeck[rdmIndexPos];
+				cardDeck[rdmIndexPos] = cardDeck[i];
+				cardDeck[i] = temp;
+			}
+			System.out.println(Arrays.toString(cardDeck));
 
 	  }
 
