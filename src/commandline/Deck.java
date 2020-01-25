@@ -98,20 +98,40 @@ public class Deck {
 	  }
 
 	  public void dealDeck() {
-		  int player = 0;
-		  int arrayPos = 0; // go to 8
-		  int deckPos = 0; // go to 39
+		  // deal 8 cards to 1st player, then 2nd, 3rd, 4th, 5th 
+		  int player = 0; // goes to 4
+		  int arrayPos = 0; // goes to 7
+		  int deckPos = 0; // goes to 39
 		  
-		  for (player = 0; player < 5; player++) {
-			  for (arrayPos = 0; arrayPos < 8; arrayPos++) {
-				  playerList[player].getPlayerCards()[arrayPos] = cardDeck[deckPos];
-				  deckPos++;
+		  while (deckPos < 40) {
+			  for (player = 0; player < 5; player++) {
+				  for (arrayPos = 0; arrayPos < 8; arrayPos++) {
+					  playerList[player].getPlayerCards()[arrayPos] = cardDeck[deckPos];
+					  deckPos++;
+				  }
 			  }
 		  }
 	  }
 
 	  public void updateCommonPile() {
-
+		  // add 5 current cards to commonPile array
+		  for (int i = 0; i < 5; i++) {
+			  commonPile[i] = playerList[i].getCurrentCard();
+		  }
+		  // shuffle cards in array
+		  Random rdm = new Random();	
+		  for (int i = 0; i < 5; i++) {
+			  int rdmIndexPos = rdm.nextInt(5);
+			  Card temp = commonPile[rdmIndexPos];
+			  commonPile[rdmIndexPos] = commonPile[i];
+			  commonPile[i] = temp;
+		  }
+	  }
+	  
+	  public void assignCommonPile() {
+		  // winning player = 
+		  // player.playerCards
+		  // 
 	  }
 
 	  
