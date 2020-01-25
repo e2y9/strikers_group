@@ -1,5 +1,3 @@
-// Under construction
-
 package commandline;
 
 interface Player {
@@ -8,8 +6,8 @@ interface Player {
 	  public void getLastCard();
 	  public void getCardTotal();
 	  public void setCardTotal();
-	  public void addCard();
 	  public void incrementCardTotal();
+	  public Card[] getPlayerCards();
 
 	}
 

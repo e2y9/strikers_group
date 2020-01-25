@@ -2,7 +2,6 @@ package commandline;
 
 public class Card {
 
-	  // attributes for each card
 	  String name;
 	  String[] cardCategories;
 	  int[] cardValues;
@@ -14,15 +13,24 @@ public class Card {
 		  cardCategories[1] = "Speed";
 		  cardCategories[2] = "Strength";
 		  cardCategories[3] = "Agility";
-		  cardCategories[4] = "Fighting";
+		  cardCategories[4] = "Combat";
 		  cardValues = new int[5];
 	  }
+	  
+	  public void fillCard(String name, int intelligence, int speed, int strength, int agility, int combat) {
+		    this.name = name;
+		    this.cardValues[0] = intelligence;
+		    this.cardValues[1] = speed;
+		    this.cardValues[2] = strength;
+		    this.cardValues[3] = agility;
+		    this.cardValues[4] = combat;
+		  }
 
 	  public String toString() {
-	    String card = String.format("%n%nName: %s %n%s : %d %n%s : %d %n%s : %d %n%s : %d %n%s : %d", 
+	    String card = String.format("%n%nName: %s %n%-13s : %d %n%-13s : %d %n%-13s : %d %n%-13s : %d %n%-13s : %d", 
 	    		getName(), getCategoryIntelligence(), getIntelligence(),
 	    		getCategorySpeed(), getSpeed(), getCategoryStrength(), getStrength(),
-	    		getCategoryAgility(), getAgility(), getCategoryFighting(), getFighting());
+	    		getCategoryAgility(), getAgility(), getCategoryCombat(), getCombat());
 	    return card;
 	  }
 
@@ -46,7 +54,7 @@ public class Card {
 	    return this.cardValues[3];
 	  }
 
-	  public int getFighting() {
+	  public int getCombat() {
 	    return this.cardValues[4];
 	  }
 	  
@@ -66,19 +74,9 @@ public class Card {
 	    return this.cardCategories[3];
 	  }
 
-	  public String getCategoryFighting() {
+	  public String getCategoryCombat() {
 	    return this.cardCategories[4];
 	  }
-
-	  public void fillCard(String name, int intelligence, int speed, int strength, int agility, int fighting) {
-	    this.name = name;
-	    this.cardValues[0] = intelligence;
-	    this.cardValues[1] = speed;
-	    this.cardValues[2] = strength;
-	    this.cardValues[3] = agility;
-	    this.cardValues[4] = fighting;
-	  }
-
 
 	  public String[] getCategories() {
 	    return cardCategories;
