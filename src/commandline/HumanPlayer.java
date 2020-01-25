@@ -9,8 +9,13 @@ public class HumanPlayer implements Player {
 	  int cardTotal;
 
 
-	  public HumanPlayer() {
-
+	  public HumanPlayer() {		  
+		  this.playerCards = new Card[40];
+	  }
+	  
+	  
+	  public Card[] getPlayerCards() {
+		  return playerCards;
 	  }
 
 	  public void getName() {
@@ -20,6 +25,7 @@ public class HumanPlayer implements Player {
 	  public void getLastCard() {
 		  
 	  };
+	 
 	  
 	  public void getCardTotal() {
 		  
@@ -29,12 +35,10 @@ public class HumanPlayer implements Player {
 		  this.cardTotal++;
 	  };
 	  
-	  public void addCard() {
-		  
-	  };
 	  
 	  public void setCardTotal() {
 		  
 	  }
+
 
 	}
