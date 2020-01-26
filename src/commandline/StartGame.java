@@ -33,21 +33,6 @@ public class StartGame {
 	    }
 	    deck.shuffleDeck();
 	    deck.dealDeck();
-	    human.updateCurrentCard();
-	    comp1.updateCurrentCard();
-	    comp2.updateCurrentCard();
-	    comp3.updateCurrentCard();
-	    comp4.updateCurrentCard();
-//	    // Testing main card deck and player's own decks to prove dealDeck works
-//	    System.out.print("\n\nPrint first card in deck:");
-//	    System.out.print(deck.getCard(0).toString());
-//	    System.out.print("\n\nPrint Player 1's fifth card:");
-//	    System.out.print(deck.getPlayerList()[0].getPlayerCards()[4].toString());
-//	    System.out.print("\n\nPrint Player 2's seventh card:");
-//	    System.out.print(deck.getPlayerList()[1].getPlayerCards()[7].toString());
-//	    System.out.print("\n\nPrint Player 5's third card:");
-//	    System.out.print(deck.getPlayerList()[4].getPlayerCards()[3].toString());
-	    
 	
 	}
 

@@ -8,8 +8,6 @@ public class HumanPlayer implements Player {
 	  String name;
 	  Card[] playerCards;
 	  int cardTotal;
-	  Card currentCard;
-	  Card lastCard;
 
 
 	  public HumanPlayer() {		  
@@ -35,17 +33,19 @@ public class HumanPlayer implements Player {
 		  }
 		  return catNum;
 	  }
-	  
-	  
-	  public Card[] getPlayerCards() {
+
+	@Override
+	public void updateCurrentCard() {
+
+	}
+
+
+	public Card[] getPlayerCards() {
 		  return playerCards;
 	  }
+
 	  
-	  public void updateCurrentCard() {
-		  this.currentCard = this.playerCards[0];
-	  }
-	  
-	  public void updateCardPostions() {
+	  public void updateCardPositions() {
 		  int movePos = 0;
 		  for (int i = 1; i < playerCards.length; i++) {
 			  playerCards[movePos] = playerCards[i];
@@ -64,30 +64,30 @@ public class HumanPlayer implements Player {
 		  return arrayPos;
 		 
 	  }
-	  
-	  public String displayCurrentCard() {
-		  return this.currentCard.toString();
-	  }
-	  
-	  
 
-	  public Card getCurrentCard() {
-		  return currentCard;
-	  }
+	@Override
+	public String displayCurrentCard() {
+		return null;
+	}
 
-	  public String getName() {
+
+	public String getName() {
 		  return name;
 	  }
-	  
-	  public Card getLastCard() {
-		  return lastCard;
-	  };
-	 
-	  
-	  public void getCardTotal() {
-		  
-	  };
-	  
+
+	@Override
+	public Card getCurrentCard() {
+		return null;
+	}
+
+	@Override
+	public Card getLastCard() {
+		return null;
+	}
+
+	public void getCardTotal() {
+	  }
+
 	  public void incrementCardTotal() {
 		  this.cardTotal++;
 	  };
