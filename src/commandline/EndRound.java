@@ -140,16 +140,6 @@ public class EndRound extends StartGame {
 		}
 	}
 	
-//	// DISPLAY showing incorrect card
-//	// TESTING REQUIRED
-//	public void displayWinningCard() {
-//		if (!commonPileRequired) {
-//			System.out.println(getCurrentWinner().getName() + "\n\n");
-//			System.out.printf("%nWinning card:%n" + getCurrentWinner().getCurrentCard().toString());
-//		} else { System.out.println("The round was a draw. Cards added to the common pile.");
-//			}
-//	}
-	
 	
 	public void assignRoundCards() {
 		int arrayPos = 100; // 100 set as it is out of bounds (testing if stmnt)
