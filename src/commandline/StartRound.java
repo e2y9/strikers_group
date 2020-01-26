@@ -5,8 +5,7 @@ public class StartRound extends StartGame {
 	public StartRound() {
 		super();
 		welcomeToRound();
-//		System.out.println() print current chooser for testing
-		System.out.println(getHuman().displayCurrentCard());
+		System.out.println(getHuman().getPlayerCards()[0].toString());
 	}
 	
 	

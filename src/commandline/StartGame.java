@@ -10,7 +10,7 @@ public class StartGame {
     Player comp3;
     Player comp4;
     Player dealer;
-    Player currentWinner;
+	Player categoryChooser;
     Deck deck;
     
 	
@@ -48,8 +48,7 @@ public class StartGame {
 //	    System.out.print("\n\nPrint Player 5's third card:");
 //	    System.out.print(deck.getPlayerList()[4].getPlayerCards()[3].toString());
 	    
-		
+	
 	}
-
 
 }

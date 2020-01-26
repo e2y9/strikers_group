@@ -1,10 +1,4 @@
-// Under construction
-
 package commandline;
-
-import java.util.Random;
-import java.util.Scanner;
-
 
 public class CompPlayer implements Player {
 
@@ -20,6 +14,11 @@ public class CompPlayer implements Player {
 	  }
 	  
 	  public int chooseCategory() {
+		  int test = 0;
+		  return test;
+	  }
+	  
+	  public int chooseCompCategory() {
 		 int[] categoryArray = new int[5];
 		 int intelligence = currentCard.getIntelligence();
 		 int speed = currentCard.getSpeed();

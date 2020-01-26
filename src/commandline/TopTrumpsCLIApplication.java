@@ -28,7 +28,7 @@ public class TopTrumpsCLIApplication {
 		StartGame game = new StartGame();
 		int counter = 1;
 		// Loop until the user wants to exit the game
-		while ((!userWantsToQuit) || (counter < 3)) {
+		while (counter < 5) {
 			StartRound startRound = new StartRound();
 			EndRound endRound = new EndRound();
 			counter++;

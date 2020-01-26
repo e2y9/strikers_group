@@ -13,7 +13,7 @@ interface Player {
 	  public void updateCurrentCard();
 	  public int findArrayPosition();
 	  public String displayCurrentCard();
+	  public int chooseCompCategory();
 	  }
 
-	}
 
