@@ -1,19 +1,17 @@
 package commandline;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HumanPlayer implements Player {
 
 	  String name;
-	  Card[] playerCards;
-	  int cardTotal;
 
 
 	  public HumanPlayer() {		  
-		  this.playerCards = new Card[40];
 	  }
 	  
+	  
+	  @Override
 	  public int chooseCategory() {
 		  int catNum = 0;
 		  try {
@@ -34,77 +32,11 @@ public class HumanPlayer implements Player {
 		  return catNum;
 	  }
 
-	@Override
-	public void updateCurrentCard() {
-
-	}
-
-
-	public Card[] getPlayerCards() {
-		  return playerCards;
-	  }
-
-	  
-	  public void updateCardPositions() {
-		  int movePos = 0;
-		  for (int i = 1; i < playerCards.length; i++) {
-			  playerCards[movePos] = playerCards[i];
-			  movePos++;
-		  }
-	  }
-	  
-	  public int findArrayPosition() {
-		  int arrayPos = 40; // set to 40 so if for loop is broken it will produce a clear error (array is 0-39)
-		  for (int i = 0; i < playerCards.length; i++) {
-			  if (playerCards[i] == null) {
-				  arrayPos = i;
-				  break;
-			  }
-		  }
-		  return arrayPos;
-		 
-	  }
-
-	@Override
-	public String displayCurrentCard() {
-		return null;
-	}
-
 
 	public String getName() {
 		  return name;
 	  }
-
-	@Override
-	public Card getCurrentCard() {
-		return null;
-	}
-
-	@Override
-	public Card getLastCard() {
-		return null;
-	}
-
-	public void getCardTotal() {
-	  }
-
-	  public void incrementCardTotal() {
-		  this.cardTotal++;
-	  };
-	  
-	  
-	  public void setCardTotal() {
-		  
-	  }
-
-	@Override
-	public int chooseCompCategory() {
-		int test = 0;
-		// TODO Auto-generated method stub
-		return test;
-	}
+	
 
 
-
-
-	}
+}

@@ -3,6 +3,8 @@ package commandline;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+// StartGame class passes 5 players & the dealer into a newly created deck
+// Then it reads the Deck.txt file and writes the info onto cards stored in the deck 
 public class StartGame {
     Player human;
     Player comp1;
@@ -10,7 +12,6 @@ public class StartGame {
     Player comp3;
     Player comp4;
     Player dealer;
-	Player categoryChooser;
     Deck deck;
     
 	
@@ -24,6 +25,7 @@ public class StartGame {
 	    dealer = new CompPlayer();
 	    deck = new Deck(human, comp1, comp2, comp3, comp4);
 
+		// load cards into deck
 	    try {
 	    	// file address is set to Emmet's computer - change url below for own machine
 	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\template_project\\strikers_group\\src\\commandline\\MarvelDeck.txt");
@@ -31,9 +33,14 @@ public class StartGame {
 	    }catch (FileNotFoundException e) {
 	      System.out.print("File not found.");
 	    }
-	    deck.shuffleDeck();
-	    deck.dealDeck();
+	   
+	    // deal deck now prints out cards each player has
 	
 	}
+	
+	public Deck getDeck() {
+		return this.deck;
+	}
+
 
 }

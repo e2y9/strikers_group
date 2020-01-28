@@ -26,12 +26,12 @@ public class Card {
 		    this.cardValues[4] = combat;
 		  }
 	  
-
+	  @Override
 	  public String toString() {
-	    String card = String.format("%n%nName: %s %n%-13s : %d %n%-13s : %d %n%-13s : %d %n%-13s : %d %n%-13s : %d", 
-	    		getName(), getCategoryIntelligence(), getIntelligence(),
-	    		getCategorySpeed(), getSpeed(), getCategoryStrength(), getStrength(),
-	    		getCategoryAgility(), getAgility(), getCategoryCombat(), getCombat());
+	    String card = String.format("%nName: %s%n%-13s : %d%n%-13s : %d%n%-13s : %d%n%-13s : %d%n%-13s : %d", 
+	    		this.name, this.cardCategories[0], this.cardValues[0],
+	    		this.cardCategories[1], this.cardValues[1], this.cardCategories[2], this.cardValues[2],
+	    		this.cardCategories[3], this.cardValues[3], this.cardCategories[4], this.cardValues[4]);
 	    return card;
 	  }
 
