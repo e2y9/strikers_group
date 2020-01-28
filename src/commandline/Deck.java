@@ -66,6 +66,7 @@ public class Deck {
 		cardDeck[8] = card8; cardDeck[9] = card9;
 	  }
 	  
+	  // Tested & Working
 	  public void loadCards(FileReader fr) {
 	    Scanner s = new Scanner(fr);
 	    // use nextLine to skip the first line
@@ -86,7 +87,8 @@ public class Deck {
 	    }
 	    s.close();
 	}
-
+	  
+	// Tested & Working
 	  public void shuffleDeck() {	  
 		  Random rdm = new Random();	
 		  for (int i = 0; i < cardDeck.length; i++) {
@@ -97,13 +99,12 @@ public class Deck {
 			}
 	  }
 
+      // Tested & Working
 	  public void dealDeck() {
 		  int deckPos = 0; // goes to 39
-
 		  for (int i = 0; i < 2; i++) {
 		  humanCards[i] = cardDeck[deckPos];
 		  cardDeck[deckPos] = null;
-//		  System.out.println(humanCards[arrayPos].toString());
 		  deckPos++;
 		  comp1Cards[i] = cardDeck[deckPos];
 		  cardDeck[deckPos] = null;
@@ -120,20 +121,58 @@ public class Deck {
 		  }
 	  }
 	  
-	  public int chooseCategory(int player) {
+		// Tested & working
+		public void getAWinner() {
+			if (getHumanLastWinner() == true) {
+				this.winner = 0;			
+			} else if (getComp1LastWinner() == true) {
+				this.winner = 1;
+			} else if (getComp2LastWinner() == true) {
+				this.winner = 2;
+			} else if (getComp3LastWinner() == true) {
+				this.winner = 3;
+			} else if (getComp4LastWinner() == true) {
+				this.winner = 4;
+			} else if (getDealerLastWinner() == true) {
+				this.winner = 5;
+			}
+		}
+		
+		// Tested & working
+		public void setAWinner(int winner) {
+			this.winner = winner;
+			if (winner == 0) {
+				setTHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
+				setFComp4LastWinner(); setFDealerLastWinner();
+			} else if (winner == 1) {
+				setFHumanLastWinner(); setTComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
+				setFComp4LastWinner(); setFDealerLastWinner();
+			} else if (winner == 2) {
+				setFHumanLastWinner(); setFComp1LastWinner(); setTComp2LastWinner(); setFComp3LastWinner(); 
+				setFComp4LastWinner(); setFDealerLastWinner();
+			} else if (winner == 3) {
+				setFHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setTComp3LastWinner(); 
+				setFComp4LastWinner(); setFDealerLastWinner();
+			} else if (winner == 4) {
+				setFHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
+				setTComp4LastWinner(); setFDealerLastWinner();
+			} else if (winner == 5) {
+				setFHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
+				setFComp4LastWinner(); setTDealerLastWinner();
+			}
+		}
+	  
+	  // Tested & Working
+	  public int chooseACategory(int player) {
 		 int[] categoryArray = new int[5];
 		 int intelligence = 99;
 		 int speed = 99;
 		 int strength = 99;
 		 int agility = 99;
 		 int combat = 99;
-		
+		 
 		 if (player == 0) {
-			 intelligence = humanCards[0].getValues()[0];
-			 speed = humanCards[0].getValues()[1];
-			 strength = humanCards[0].getValues()[2];
-			 agility = humanCards[0].getValues()[3];
-			 combat = humanCards[0].getValues()[4];
+			 System.out.print("Human category chosen elsewhere.");
 		 } else if (player == 1) {
 			 intelligence = comp1Cards[0].getValues()[0];
 			 speed = comp1Cards[0].getValues()[1];
@@ -191,39 +230,40 @@ public class Deck {
 			 } else { return 99; } // return 99 (out of bounds) in result of an error 
 		 }
 	  
-		// TESTING
+	  	// Tested & Working
 		public void whoChoosesCategory(int winner) {
 			// decide which player gets to choose a category
 			// based on winner variable, which is set by getAWinner
 			if (winner == 0) {
 				this.chosenCategory = playerList[0].chooseCategory();
 			} else if (winner == 1) {
-				this.chosenCategory = chooseCategory(1); // error starts here
+				this.chosenCategory = chooseACategory(1);
 			} else if (winner == 2) {
-				this.chosenCategory = chooseCategory(2);
+				this.chosenCategory = chooseACategory(2);
 			} else if (winner == 3) {
-				this.chosenCategory = chooseCategory(3);
+				this.chosenCategory = chooseACategory(3);
 			} else if (winner == 4) {
-				this.chosenCategory = chooseCategory(4);
+				this.chosenCategory = chooseACategory(4);
 			}
 		}
 		
-		// NOW TESTING
+		// Tested & Working
 		public void compareValues() {
-			
-//			assign chosen category values (chooseCategory method returns an int) to an int per player
+			// assign chosen category values (chooseCategory method returns an int) to 1 int per player
 			int humanValue = humanCards[0].getValues()[this.chosenCategory];
 			int comp1Value = comp1Cards[0].getValues()[this.chosenCategory];
 			int comp2Value = comp2Cards[0].getValues()[this.chosenCategory];
 			int comp3Value = comp3Cards[0].getValues()[this.chosenCategory];
 			int comp4Value = comp4Cards[0].getValues()[this.chosenCategory];
 			
+			// For testing only, print out all cards being compared
 			System.out.println(humanCards[0].toString());
 			System.out.println(comp1Cards[0].toString());
 			System.out.println(comp2Cards[0].toString());
 			System.out.println(comp3Cards[0].toString());
 			System.out.println(comp4Cards[0].toString());
 			
+			// For testing only, print out all values being compared
 			System.out.println(humanValue);
 			System.out.println(comp1Value);
 			System.out.println(comp2Value);
@@ -266,6 +306,7 @@ public class Deck {
 		}
 		
 		
+		// UNDER TESTING
 		public void assignRoundCards() {
 			int arrayPos = 99; // 99 set as it is out of bounds (testing if stmnt)
 			if (getDealerLastWinner() == true) {
@@ -286,6 +327,10 @@ public class Deck {
 				comp4Cards[0] = null;
 				} else if (getHumanLastWinner() == true) {
 					arrayPos = findArrayPosition(0);
+					// first move player's own current card to back of their deck
+					humanCards[arrayPos] = humanCards[0];
+					arrayPos++;
+					// then other players' current cards
 					humanCards[arrayPos] = comp1Cards[0];
 					comp1Cards[0] = null;
 					arrayPos++;
@@ -297,9 +342,11 @@ public class Deck {
 					arrayPos++;
 					humanCards[arrayPos] = comp4Cards[0];
 					comp4Cards[0] = null;
-					arrayPos++;
+
 					} else if (getComp1LastWinner() == true) {
 						arrayPos = findArrayPosition(1);
+						comp1Cards[arrayPos] = comp1Cards[0];
+						arrayPos++;
 						comp1Cards[arrayPos] = humanCards[0];
 						humanCards[0] = null;
 						arrayPos++;
@@ -311,9 +358,10 @@ public class Deck {
 						arrayPos++;
 						comp1Cards[arrayPos] = comp4Cards[0];
 						comp4Cards[0] = null;
-						arrayPos++;
 						} else if (getComp2LastWinner() == true) {
 							arrayPos = findArrayPosition(2);
+							comp2Cards[arrayPos] = comp2Cards[0];
+							arrayPos++;
 							comp2Cards[arrayPos] = humanCards[0];
 							humanCards[0] = null;
 							arrayPos++;
@@ -328,6 +376,8 @@ public class Deck {
 							arrayPos++;
 							} else if (getComp3LastWinner() == true) {
 								arrayPos = findArrayPosition(3);
+								comp3Cards[arrayPos] = comp3Cards[0];
+								arrayPos++;
 								comp3Cards[arrayPos] = humanCards[0];
 								humanCards[0] = null;
 								arrayPos++;
@@ -342,6 +392,8 @@ public class Deck {
 								arrayPos++;
 								} else if (getComp4LastWinner() == true) {
 									arrayPos = findArrayPosition(4);
+									comp4Cards[arrayPos] = comp4Cards[0];
+									arrayPos++;
 									comp4Cards[arrayPos] = humanCards[0];
 									humanCards[0] = null;
 									arrayPos++;
@@ -395,83 +447,7 @@ public class Deck {
 				}
 		}
 		
-		// tested & working
-		public void getAWinner() {
-			if (getHumanLastWinner() == true) {
-				this.winner = 0;			
-			} else if (getComp1LastWinner() == true) {
-				this.winner = 1;
-			} else if (getComp2LastWinner() == true) {
-				this.winner = 2;
-			} else if (getComp3LastWinner() == true) {
-				this.winner = 3;
-			} else if (getComp4LastWinner() == true) {
-				this.winner = 4;
-			} else if (getDealerLastWinner() == true) {
-				this.winner = 5;
-			}
-		}
-		
-		// tested & working
-		public void setAWinner(int winner) {
-			this.winner = winner;
-			if (winner == 0) {
-				setTHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
-				setFComp4LastWinner(); setFDealerLastWinner();
-			} else if (winner == 1) {
-				setFHumanLastWinner(); setTComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
-				setFComp4LastWinner(); setFDealerLastWinner();
-			} else if (winner == 2) {
-				setFHumanLastWinner(); setFComp1LastWinner(); setTComp2LastWinner(); setFComp3LastWinner(); 
-				setFComp4LastWinner(); setFDealerLastWinner();
-			} else if (winner == 3) {
-				setFHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setTComp3LastWinner(); 
-				setFComp4LastWinner(); setFDealerLastWinner();
-			} else if (winner == 4) {
-				setFHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
-				setTComp4LastWinner(); setFDealerLastWinner();
-			} else if (winner == 5) {
-				setFHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
-				setFComp4LastWinner(); setTDealerLastWinner();
-			}
-		}
-		
-		// UNDER CONSTRUCTION
-		public void moveCardsUp() {
-			// move all playerCards[i] up one
-			// CHECK if last card is also being wiped/overwritten, as it doesn't seem like it from looking at this
-			// could do an arrayPosition check on the
-			
-			// HUMAN
-			int newPosition = 0;
-			for (int i = 1; i < findArrayPosition(0); i++) {
-				humanCards[newPosition] = humanCards[i];
-				newPosition++;
-			}
-			for (int i = 1; i < findArrayPosition(1); i++) {
-				comp1Cards[newPosition] = comp1Cards[i];
-				newPosition++;
-			}
-			for (int i = 1; i < findArrayPosition(2); i++) {
-				comp2Cards[newPosition] = comp2Cards[i];
-				newPosition++;
-			}
-			for (int i = 1; i < findArrayPosition(3); i++) {
-				comp3Cards[newPosition] = comp3Cards[i];
-				newPosition++;
-			}
-			for (int i = 1; i < findArrayPosition(4); i++) {
-				comp4Cards[newPosition] = comp4Cards[i];
-				newPosition++;
-			}
-			// COMP1
-			// COMP2
-			// COMP3
-			// COMP4
-			
-		}
 	  
-	  // use if statements like above will
 	  public int findArrayPosition(int player) {
 		  int arrayPos = 99; // set to 40 (out of bounds) so a broken for loop will produce a clear error
 	 
@@ -521,44 +497,52 @@ public class Deck {
 		  return arrayPos;
 	  }
 	  
-	  
-//	  // WORKING string representation
-//	  public void testNewDeck() {
-//		  humanCards[0].toString();
-//		  comp1Cards[0].toString();
-//	  }
-//	  
-//	  
-//	  // WORKING string
-//		public void testDeckStuff(int p) {
-//			System.out.println(comp1Cards[0].toString());
-//		}
-		
-//		// WORKING value
-//		public void returnMeACard() {
-//			System.out.println(comp1Cards[0].getValues()[1]);
-//		}
-	  
-	  // Original dealDeck
-//	  public void dealDeck() {
-//		  // deal 8 cards to 1st player, then 2nd, 3rd, 4th, 5th 
-//		  int player = 0; // goes to 4
-//		  int arrayPos = 0; // goes to 7
-//		  int deckPos = 0; // goes to 39
-//
-//			  for (player = 0; player < 5; player++) {
-//				  for (arrayPos = 0; arrayPos < 2; arrayPos++) {
-//					  playerList[player].getPlayerCards()[arrayPos] = cardDeck[deckPos];
-//					  cardDeck[deckPos] = null;
-//					  // TEST print statements
-//					  System.out.println("\nPlayer " + player);
-//					  System.out.println(playerList[player].getPlayerCards()[arrayPos].toString());
-//					  System.out.println(deckPos);
-//					  deckPos++;
-//				  }
-//				  System.out.println("-+-+-+-+-+");
-//			  }
-//	  }
+		// UNDER CONSTRUCTION
+		public void moveCardsUp() {
+			// move all playerCards[i] up one position in each array
+			// start at 0, assign card index pos 1 to index pos 0
+			// increment both, so now assign card index pos 2 to index pos 1
+			int newPosition = 0;
+			for (int i = 1; i < humanCards.length; i++) {
+				if (humanCards[i] != null) {
+				humanCards[newPosition] = humanCards[i];
+				humanCards[i] = null;
+				newPosition++;
+				}
+			}
+			newPosition = 0;
+			for (int i = 1; i < comp1Cards.length; i++) {
+				if (comp1Cards[i] != null) {
+				comp1Cards[newPosition] = comp1Cards[i];
+				comp1Cards[i] = null;
+				newPosition++;
+				}
+			}
+			newPosition = 0;
+			for (int i = 1; i < comp2Cards.length; i++) {
+				if (comp2Cards[i] != null) {
+				comp2Cards[newPosition] = comp2Cards[i];
+				comp2Cards[i] = null;
+				newPosition++;
+				}
+			}
+			newPosition = 0;
+			for (int i = 1; i < comp3Cards.length; i++) {
+				if (comp3Cards[i] != null) {
+				comp3Cards[newPosition] = comp3Cards[i];
+				comp3Cards[i] = null;
+				newPosition++;
+				}
+			}
+			newPosition = 0;
+			for (int i = 1; i < comp4Cards.length; i++) {
+				if (comp4Cards[i] != null) {
+				comp4Cards[newPosition] = comp4Cards[i];
+				comp4Cards[i] = null;
+				newPosition++;
+				}
+			}
+		}
 
 	  
 	  public Player[] getPlayerList() {
@@ -569,8 +553,8 @@ public class Deck {
 		return cardDeck;
 	}
 
-	  public Card getCard(int i) {
-	    return cardDeck[i];
+	  public Card getUserCard() {
+	    return humanCards[0];
 	  }
 	  
 	  public Card[] getHumanCards() {
@@ -667,6 +651,23 @@ public class Deck {
 		
 		public int getWinnerNumber() {
 			return winner;
+		}
+		
+		// FOR TESTING
+		public void showAllCards() {
+			System.out.println(humanCards[0]);
+			System.out.println(humanCards[1]);
+			System.out.println(comp1Cards[0]);
+			System.out.println(comp1Cards[1]);
+			System.out.println(comp2Cards[0]);
+			System.out.println(comp2Cards[1]);
+			System.out.println(comp3Cards[0]);
+			System.out.println(comp3Cards[1]);
+			System.out.println(comp4Cards[0]);
+			System.out.println(comp4Cards[1]);
+		}
+		
+		public void addCards() {
 		}
 
 

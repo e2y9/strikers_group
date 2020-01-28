@@ -23,48 +23,119 @@ public class TopTrumpsCLIApplication {
 //		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
 		
 		 System.out.print("Welcome to Top Trumps!\n");
-//		    // Testing main card deck and player's own decks to prove dealDeck works
-//	        Player human = new HumanPlayer();
-//	        Player comp1 = new CompPlayer();
-//	        Player comp2 = new CompPlayer();
-//	        Player comp3 = new CompPlayer();
-//	        Player comp4 = new CompPlayer();
-//	        Player dealer = new CompPlayer();
-//	        Deck deck = new Deck(human, comp1, comp2, comp3, comp4);
-		 
-		 	// test chooseCategory
 		 
 		 	StartGame newGame = new StartGame();
 		 	// Shuffle deck & Deal deck
 		 	newGame.getDeck().shuffleDeck();
 		 	newGame.getDeck().dealDeck();
+		 	
+//		 	newGame.getDeck().showAllCards();
+//		 	System.out.println("\n\n\n");
 		   
 		    // TEST CARDS are in player decks
-		 	System.out.println(newGame.getDeck().getHumanCards()[0].toString());
-		 	System.out.println(newGame.getDeck().getHumanCards()[1].toString());
-		 	System.out.println(newGame.getDeck().getComp1Cards()[0].toString());
-		 	System.out.println(newGame.getDeck().getComp1Cards()[1].toString());
-		 	System.out.println(newGame.getDeck().getComp2Cards()[0].toString());
-		 	System.out.println(newGame.getDeck().getComp2Cards()[1].toString());
-		 	System.out.println(newGame.getDeck().getComp3Cards()[0].toString());
-		 	System.out.println(newGame.getDeck().getComp3Cards()[1].toString());
-		 	System.out.println(newGame.getDeck().getComp4Cards()[0].toString());
-		 	System.out.println(newGame.getDeck().getComp4Cards()[1].toString());
-		 	// TEST CARD VALUES are reachable
-		 	System.out.println("Get Intelligence: ");
-		 	System.out.println(newGame.getDeck().getHumanCards()[0].getValues()[0]);		 	
-		 	System.out.println(newGame.getDeck().getHumanCards()[1].getValues()[0]);				 	
-		 	System.out.println(newGame.getDeck().getComp1Cards()[0].getValues()[0]);	
-		 	System.out.println(newGame.getDeck().getComp1Cards()[1].getValues()[0]);	
-		 	System.out.println(newGame.getDeck().getComp2Cards()[0].getValues()[0]);	
-		 	System.out.println(newGame.getDeck().getComp2Cards()[1].getValues()[0]);	
-		 	System.out.println(newGame.getDeck().getComp3Cards()[0].getValues()[0]);	
-		 	System.out.println(newGame.getDeck().getComp3Cards()[1].getValues()[0]);	
-		 	System.out.println(newGame.getDeck().getComp4Cards()[0].getValues()[0]);	
-		 	System.out.println(newGame.getDeck().getComp4Cards()[1].getValues()[0]);	
-		 	
-		 
+//		 	System.out.println(newGame.getDeck().getHumanCards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getHumanCards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp1Cards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getComp1Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp2Cards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getComp2Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp3Cards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getComp3Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp4Cards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getComp4Cards()[1].toString());
 
+//		 	// TEST CARD VALUES are reachable
+//		 	System.out.println("Get Intelligence: ");
+//		 	System.out.println(newGame.getDeck().getHumanCards()[0].getValues()[0]);		 	
+//		 	System.out.println(newGame.getDeck().getHumanCards()[1].getValues()[0]);				 	
+//		 	System.out.println(newGame.getDeck().getComp1Cards()[0].getValues()[0]);	
+//		 	System.out.println(newGame.getDeck().getComp1Cards()[1].getValues()[0]);	
+//		 	System.out.println(newGame.getDeck().getComp2Cards()[0].getValues()[0]);	
+//		 	System.out.println(newGame.getDeck().getComp2Cards()[1].getValues()[0]);	
+//		 	System.out.println(newGame.getDeck().getComp3Cards()[0].getValues()[0]);	
+//		 	System.out.println(newGame.getDeck().getComp3Cards()[1].getValues()[0]);	
+//		 	System.out.println(newGame.getDeck().getComp4Cards()[0].getValues()[0]);	
+//		 	System.out.println(newGame.getDeck().getComp4Cards()[1].getValues()[0]);
+		 	
+//		 	System.out.println("\nStart Game!\n");
+//		 	System.out.println("User Card:\n" + newGame.getDeck().getUserCard());
+//		 	newGame.getDeck().getAWinner();
+//		 	newGame.getDeck().whoChoosesCategory(1);
+//		 	newGame.getDeck().compareValues();
+		 	
+//		 	System.out.println("\nbooleans for who won:");
+//		 	System.out.println(newGame.getDeck().getHumanLastWinner());
+//		 	System.out.println(newGame.getDeck().getComp1LastWinner());		 
+//		 	System.out.println(newGame.getDeck().getComp2LastWinner());	
+//		 	System.out.println(newGame.getDeck().getComp3LastWinner());	
+//		 	System.out.println(newGame.getDeck().getComp4LastWinner());	
+//		 	System.out.println(newGame.getDeck().getDealerLastWinner());	
+		 	
+		 	newGame.getDeck().setAWinner(0);
+		 	newGame.getDeck().assignRoundCards();
+//		 	newGame.getDeck().assignDealerCards();
+		 	
+//		    // TEST CARDS are in player decks
+		 	System.out.println("Winner assigned, round cards assigned.");
+		 	System.out.println("\n-=-=-=-=\n");
+		 	System.out.println(newGame.getDeck().findArrayPosition(0));
+		 	System.out.println(newGame.getDeck().findArrayPosition(1));
+		 	System.out.println(newGame.getDeck().findArrayPosition(2));
+		 	System.out.println(newGame.getDeck().findArrayPosition(3));
+		 	System.out.println(newGame.getDeck().findArrayPosition(4));
+		 	System.out.println(newGame.getDeck().findArrayPosition(5));
+		 	newGame.getDeck().moveCardsUp();
+		 	System.out.println(newGame.getDeck().findArrayPosition(0));
+		 	System.out.println(newGame.getDeck().findArrayPosition(1));
+		 	System.out.println(newGame.getDeck().findArrayPosition(2));
+		 	System.out.println(newGame.getDeck().findArrayPosition(3));
+		 	System.out.println(newGame.getDeck().findArrayPosition(4));
+		 	System.out.println(newGame.getDeck().findArrayPosition(5));
+		 	
+//		 	System.out.println(newGame.getDeck().getHumanCards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getHumanCards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getHumanCards()[2].toString());
+//		 	System.out.println(newGame.getDeck().getHumanCards()[3].toString());
+//		 	System.out.println(newGame.getDeck().getHumanCards()[4].toString());
+//		 	System.out.println(newGame.getDeck().getHumanCards()[5].toString());
+//		 	System.out.println(newGame.getDeck().getHumanCards()[6].toString());
+//		 	
+//		 	System.out.println("\nComp cards:");
+//		 	System.out.println(newGame.getDeck().getComp1Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp2Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp3Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp4Cards()[1].toString());
+//		 	newGame.getDeck().showAllCards();
+		 	
+//		 	// Testing Cards have been moved
+//		 	System.out.println(newGame.getDeck().getHumanCards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getComp1Cards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getComp2Cards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getComp3Cards()[0].toString());
+//		 	System.out.println(newGame.getDeck().getComp4Cards()[0].toString());
+		 	
+//		 	// Testing Cards have been moved
+//		 	System.out.println(newGame.getDeck().getHumanCards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp1Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp2Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp3Cards()[1].toString());
+//		 	System.out.println(newGame.getDeck().getComp4Cards()[1].toString());
+		 	
+//		 	try {
+//		 	System.out.println(newGame.getDeck().getHumanCards()[1].toString());
+//		 	} catch (Exception e) {System.out.println("no human card here");}
+//		 	try {
+//		 	System.out.println(newGame.getDeck().getComp1Cards()[1].toString());
+// 	} catch (Exception e) {System.out.println("no comp1 card here");}
+//		 	try {
+//		 	System.out.println(newGame.getDeck().getComp2Cards()[1].toString());
+//	} catch (Exception e) {System.out.println("no comp2 card here");}
+//		 	try {
+//		 	System.out.println(newGame.getDeck().getComp3Cards()[1].toString());
+//	 	} catch (Exception e) {System.out.println("no comp3 card here");}
+//		 	try {
+//		 	System.out.println(newGame.getDeck().getComp4Cards()[1].toString());
+//	 	} catch (Exception e) {System.out.println("no comp4 card here");}
 
 
 
