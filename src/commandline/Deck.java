@@ -122,9 +122,9 @@ public class Deck {
 	  }
 	  
 		// Tested & working
-		public void getAWinner() {
+		public int getAWinner() {
 			if (getHumanLastWinner() == true) {
-				this.winner = 0;			
+				this.winner = 0;
 			} else if (getComp1LastWinner() == true) {
 				this.winner = 1;
 			} else if (getComp2LastWinner() == true) {
@@ -134,8 +134,10 @@ public class Deck {
 			} else if (getComp4LastWinner() == true) {
 				this.winner = 4;
 			} else if (getDealerLastWinner() == true) {
-				this.winner = 5;
-			}
+			// if dealer is last winner, don't update the int number for winner
+			// instead keep the same int as used on previous round (i.e. the last player winner)
+				return winner;
+			} return winner;
 		}
 		
 		// Tested & working
@@ -156,9 +158,30 @@ public class Deck {
 			} else if (winner == 4) {
 				setFHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
 				setTComp4LastWinner(); setFDealerLastWinner();
-			} else if (winner == 5) {
+			} else if (winner == 5) {	
 				setFHumanLastWinner(); setFComp1LastWinner(); setFComp2LastWinner(); setFComp3LastWinner(); 
 				setFComp4LastWinner(); setTDealerLastWinner();
+			}
+		}
+		
+	  	// Tested & Working
+		public void whoChoosesCategory(int playerWon) {
+			// decide which player gets to choose a category
+			// based on winner variable, which is set by getAWinner
+			// human player has their own chooseCategory method
+			// otherwise pass the comp player's number (1-4) into comp chooseACategory method
+			if (playerWon == 0) {
+				this.chosenCategory = playerList[0].chooseCategory();
+			} else if (playerWon == 1) {
+				this.chosenCategory = chooseACategory(1);
+			} else if (playerWon == 2) {
+				this.chosenCategory = chooseACategory(2);
+			} else if (playerWon == 3) {
+				this.chosenCategory = chooseACategory(3);
+			} else if (playerWon == 4) {
+				this.chosenCategory = chooseACategory(4);
+			} else if (playerWon == 5 ) {
+				System.out.println("Dealer can't choose categories.");
 			}
 		}
 	  
@@ -217,6 +240,8 @@ public class Deck {
 		 }
 		 
 		 // now check which stored card value matches max, and return the corresponding category number
+		 // as this method is automatically called by whoChoosesCategory, the return values are passed 
+		 // into the previous method (whoChoosescategory) and are used to update the chosenCategory int
 		 if (max == intelligence) {
 			 return 0;
 			 } else if (max == speed) {
@@ -229,27 +254,12 @@ public class Deck {
 			 return 4;
 			 } else { return 99; } // return 99 (out of bounds) in result of an error 
 		 }
-	  
-	  	// Tested & Working
-		public void whoChoosesCategory(int winner) {
-			// decide which player gets to choose a category
-			// based on winner variable, which is set by getAWinner
-			if (winner == 0) {
-				this.chosenCategory = playerList[0].chooseCategory();
-			} else if (winner == 1) {
-				this.chosenCategory = chooseACategory(1);
-			} else if (winner == 2) {
-				this.chosenCategory = chooseACategory(2);
-			} else if (winner == 3) {
-				this.chosenCategory = chooseACategory(3);
-			} else if (winner == 4) {
-				this.chosenCategory = chooseACategory(4);
-			}
-		}
 		
 		// Tested & Working
 		public void compareValues() {
-			// assign chosen category values (chooseCategory method returns an int) to 1 int per player
+			// assign chosen category values (chooseCategory method returns an int, used to set chosenCategory) 
+			// values assigned to 1 int per player
+			// index pos [0] is every player's current card
 			int humanValue = humanCards[0].getValues()[this.chosenCategory];
 			int comp1Value = comp1Cards[0].getValues()[this.chosenCategory];
 			int comp2Value = comp2Cards[0].getValues()[this.chosenCategory];
@@ -257,6 +267,7 @@ public class Deck {
 			int comp4Value = comp4Cards[0].getValues()[this.chosenCategory];
 			
 			// For testing only, print out all cards being compared
+			System.out.println("\nEvery player's current card [0] being compared:\n");
 			System.out.println(humanCards[0].toString());
 			System.out.println(comp1Cards[0].toString());
 			System.out.println(comp2Cards[0].toString());
@@ -264,6 +275,7 @@ public class Deck {
 			System.out.println(comp4Cards[0].toString());
 			
 			// For testing only, print out all values being compared
+			System.out.println("\nValues being compared:\n");
 			System.out.println(humanValue);
 			System.out.println(comp1Value);
 			System.out.println(comp2Value);
@@ -274,7 +286,7 @@ public class Deck {
 			// check which player has the highest value 
 			// print the winning card to the screen
 			// or, if draw, notify players that the dealer is holding onto the cards
-			// also set the ___LastWinner variable based on who wins the round
+			// also set the ___LastWinner variable based on who wins the round using setAWinner() method
 			if ((humanValue > comp1Value) && (humanValue > comp2Value) 
 					&& (humanValue > comp3Value) && (humanValue > comp4Value)) {
 				System.out.printf("%nWinning card:%n" + humanCards[0].toString());
@@ -305,8 +317,7 @@ public class Deck {
 			}
 		}
 		
-		
-		// UNDER TESTING
+		// Tested & working
 		public void assignRoundCards() {
 			int arrayPos = 99; // 99 set as it is out of bounds (testing if stmnt)
 			if (getDealerLastWinner() == true) {
@@ -330,7 +341,7 @@ public class Deck {
 					// first move player's own current card to back of their deck
 					humanCards[arrayPos] = humanCards[0];
 					arrayPos++;
-					// then other players' current cards
+					// then other players' current cards are added
 					humanCards[arrayPos] = comp1Cards[0];
 					comp1Cards[0] = null;
 					arrayPos++;
@@ -447,7 +458,7 @@ public class Deck {
 				}
 		}
 		
-	  
+	  // Tested & working
 	  public int findArrayPosition(int player) {
 		  int arrayPos = 99; // set to 40 (out of bounds) so a broken for loop will produce a clear error
 	 
@@ -497,7 +508,7 @@ public class Deck {
 		  return arrayPos;
 	  }
 	  
-		// UNDER CONSTRUCTION
+	  	// Tested & working
 		public void moveCardsUp() {
 			// move all playerCards[i] up one position in each array
 			// start at 0, assign card index pos 1 to index pos 0
@@ -598,7 +609,7 @@ public class Deck {
 		}
 		
 		public boolean getDealerLastWinner() {
-			return comp4LastWinner;
+			return dealerLastWinner;
 		}
 		
 		public void setTHumanLastWinner() {
