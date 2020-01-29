@@ -5,6 +5,7 @@ public class TopTrumpsCLIApplication {
 
 	public static void main(String[] args) {
 		
+<<<<<<< HEAD
 		 System.out.print("Welcome to Top Trumps!\n");
 		 
 		 	// initialise the game, creating 5 players with a card pile each (+ a dealer pile for commonPile cards)
@@ -75,6 +76,9 @@ public class TopTrumpsCLIApplication {
 		 	System.out.println(newGame.getDeck().getComp2Cards()[0].toString());
 		 	System.out.println(newGame.getDeck().getComp3Cards()[0].toString());
 		 	System.out.println(newGame.getDeck().getComp4Cards()[0].toString());
+=======
+		//Edited for git test
+>>>>>>> Ashwin
 	
 
 	}
