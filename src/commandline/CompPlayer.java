@@ -1,3 +1,4 @@
+/*This method implements Player interface, Choose Category method is still incomplete*/
 package commandline;
 
 public class CompPlayer implements Player {
