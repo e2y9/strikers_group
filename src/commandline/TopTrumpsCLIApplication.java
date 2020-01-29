@@ -29,7 +29,7 @@ public class TopTrumpsCLIApplication {
 		 	
 		 	// change the int in the setAWinner method (0-4) to test different category choosers 
 		 	// (otherwise it's auto-set to human for round 1)
-		 	 newGame.getDeck().setAWinner(1);
+		 	// newGame.getDeck().setAWinner(1);
 		 	// ^ un-mute the above line for testing ^
 		 	
 		 	// the getAWinner method checks all the booleans at the top of the Deck class (humanLastWinner etc)

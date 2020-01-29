@@ -238,7 +238,6 @@ public class Deck {
 				 max = categoryArray[i];
 			 }
 		 }
-		 
 		 // now check which stored card value matches max, and return the corresponding category number
 		 // as this method is automatically called by whoChoosesCategory, the return values are passed 
 		 // into the previous method (whoChoosescategory) and are used to update the chosenCategory int
