@@ -22,6 +22,7 @@ public class TopTrumpsCLIApplication {
 //		// State
 //		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
 		
+		//Edited for git test
 	
 
 	}

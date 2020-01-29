@@ -28,7 +28,7 @@ public class StartGame {
 		// load cards into deck
 	    try {
 	    	// file address is set to Emmet's computer - change url below for own machine
-	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\template_project\\strikers_group\\src\\commandline\\MarvelDeck.txt");
+	    	FileReader fr = new FileReader("C:\\Users\\Ashwin\\Documents\\Glasgow\\Master Project IT\\Emmet Repo\\strikers_group\\src\\commandline\\MarvelDeck.txt");
 	    	deck.loadCards(fr);
 	    }catch (FileNotFoundException e) {
 	      System.out.print("File not found.");
