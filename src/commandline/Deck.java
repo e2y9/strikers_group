@@ -1,20 +1,23 @@
+/*It creates a deck for each player and dealer*/
 package commandline;
 
 import java.io.FileReader;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Deck {
 
 	  Card[] cardDeck;
-	  Player[] playerList;
-	  Card[] humanCards;
-	  Card[] comp1Cards;
-	  Card[] comp2Cards;
-	  Card[] comp3Cards;
-	  Card[] comp4Cards;
-	  Card[] dealerCards;
+	  ArrayList<Player> playerList;
+	  ArrayList<Card> humanCards;
+	  ArrayList<Card> comp1Cards;
+	  ArrayList<Card> comp2Cards;
+	  ArrayList<Card> comp3Cards;
+	  ArrayList<Card> comp4Cards;
+	  ArrayList<Card> dealerCards;
+	  
+	  
 	  int chosenCategory;
 	  int winner; // set by getAWinner at start of each category choice
 	  boolean humanLastWinner;
@@ -31,20 +34,21 @@ public class Deck {
 	  public Deck(Player p1, Player p2, Player p3, Player p4, Player p5) {
 	    
 		cardDeck = new Card[10];
-		playerList = new Player[5];
+		playerList = new ArrayList<Player>();
 		
-	    this.playerList[0] = p1;
-	    this.playerList[1] = p2;
-	    this.playerList[2] = p3;
-	    this.playerList[3] = p4;
-	    this.playerList[4] = p5;
+	    playerList.add(p1);
+	    playerList.add(p2);
+	    playerList.add(p3);
+	    playerList.add(p4);
+	    playerList.add(p5);
 	    
-	    humanCards = new Card[10];
-	    comp1Cards = new Card[10];
-	    comp2Cards = new Card[10];
-	    comp3Cards = new Card[10];
-	    comp4Cards = new Card[10];
-	    dealerCards = new Card[10];
+	    humanCards  = new  ArrayList<Card>();
+	    comp1Cards  = new  ArrayList<Card>();
+	    comp2Cards  = new  ArrayList<Card>();
+	    comp3Cards  = new  ArrayList<Card>();
+	    comp4Cards  = new  ArrayList<Card>();
+	    dealerCards  = new  ArrayList<Card>();
+	    
 	    
 	    chosenCategory = 99;
 	    winner = 0;
@@ -98,6 +102,29 @@ public class Deck {
 			  cardDeck[i] = temp;
 			}
 	  }
+<<<<<<< HEAD
+	  
+	  public void dealDeck()
+	  {
+		  int deckPos = 0;
+		  for(int i = 0; i < 2; i++)
+		  {
+			  humanCards.add(cardDeck[deckPos]);
+			  cardDeck[deckPos] = null;
+			  deckPos++;
+			  comp1Cards.add(cardDeck[deckPos]);
+			  cardDeck[deckPos] = null;
+			  deckPos++;
+			  comp2Cards.add(cardDeck[deckPos]);
+			  cardDeck[deckPos] = null;
+			  deckPos++;
+			  comp3Cards.add(cardDeck[deckPos]);
+			  cardDeck[deckPos] = null;
+			  deckPos++;
+			  comp4Cards.add(cardDeck[deckPos]);
+			  cardDeck[deckPos] = null;
+			  deckPos++;
+=======
 
       // Tested & Working
 	  public void dealDeck() {
@@ -118,6 +145,7 @@ public class Deck {
 		  comp4Cards[i] = cardDeck[deckPos];
 		  cardDeck[deckPos] = null;
 		  deckPos++;
+>>>>>>> master
 		  }
 	  }
 	  
@@ -171,7 +199,7 @@ public class Deck {
 			// human player has their own chooseCategory method
 			// otherwise pass the comp player's number (1-4) into comp chooseACategory method
 			if (playerWon == 0) {
-				this.chosenCategory = playerList[0].chooseCategory();
+				this.chosenCategory = playerList.get(0).chooseCategory();
 			} else if (playerWon == 1) {
 				this.chosenCategory = chooseACategory(1);
 			} else if (playerWon == 2) {
@@ -197,29 +225,29 @@ public class Deck {
 		 if (player == 0) {
 			 System.out.print("Human category chosen elsewhere.");
 		 } else if (player == 1) {
-			 intelligence = comp1Cards[0].getValues()[0];
-			 speed = comp1Cards[0].getValues()[1];
-			 strength = comp1Cards[0].getValues()[2];
-			 agility = comp1Cards[0].getValues()[3];
-			 combat = comp1Cards[0].getValues()[4];
+			 intelligence = comp1Cards.get(0).getValues()[0];
+			 speed = comp1Cards.get(0).getValues()[1];
+			 strength = comp1Cards.get(0).getValues()[2];
+			 agility = comp1Cards.get(0).getValues()[3];
+			 combat = comp1Cards.get(0).getValues()[4];
 		 } else if (player == 2) {
-			 intelligence = comp2Cards[0].getValues()[0];
-			 speed = comp2Cards[0].getValues()[1];
-			 strength = comp2Cards[0].getValues()[2];
-			 agility = comp2Cards[0].getValues()[3];
-			 combat = comp2Cards[0].getValues()[4];
+			 intelligence = comp2Cards.get(0).getValues()[0];
+			 speed = comp2Cards.get(0).getValues()[1];
+			 strength = comp2Cards.get(0).getValues()[2];
+			 agility = comp2Cards.get(0).getValues()[3];
+			 combat = comp2Cards.get(0).getValues()[4];
 		 } else if (player == 3) {
-			 intelligence = comp3Cards[0].getValues()[0];
-			 speed = comp3Cards[0].getValues()[1];
-			 strength = comp3Cards[0].getValues()[2];
-			 agility = comp3Cards[0].getValues()[3];
-			 combat = comp3Cards[0].getValues()[4];
+			 intelligence = comp3Cards.get(0).getValues()[0];
+			 speed = comp3Cards.get(0).getValues()[1];
+			 strength = comp3Cards.get(0).getValues()[2];
+			 agility = comp3Cards.get(0).getValues()[3];
+			 combat = comp3Cards.get(0).getValues()[4];
 		 } else if (player == 4) {
-			 intelligence = comp4Cards[0].getValues()[0];
-			 speed = comp4Cards[0].getValues()[1];
-			 strength = comp4Cards[0].getValues()[2];
-			 agility = comp4Cards[0].getValues()[3];
-			 combat = comp4Cards[0].getValues()[4];
+			 intelligence = comp4Cards.get(0).getValues()[0];
+			 speed = comp4Cards.get(0).getValues()[1];
+			 strength = comp4Cards.get(0).getValues()[2];
+			 agility = comp4Cards.get(0).getValues()[3];
+			 combat = comp4Cards.get(0).getValues()[4];
 		 }
 
 		 categoryArray[0] = intelligence;
@@ -259,19 +287,19 @@ public class Deck {
 			// assign chosen category values (chooseCategory method returns an int, used to set chosenCategory) 
 			// values assigned to 1 int per player
 			// index pos [0] is every player's current card
-			int humanValue = humanCards[0].getValues()[this.chosenCategory];
-			int comp1Value = comp1Cards[0].getValues()[this.chosenCategory];
-			int comp2Value = comp2Cards[0].getValues()[this.chosenCategory];
-			int comp3Value = comp3Cards[0].getValues()[this.chosenCategory];
-			int comp4Value = comp4Cards[0].getValues()[this.chosenCategory];
+			int humanValue = humanCards.get(0).getValues()[this.chosenCategory];
+			int comp1Value = comp1Cards.get(0).getValues()[this.chosenCategory];
+			int comp2Value = comp2Cards.get(0).getValues()[this.chosenCategory];
+			int comp3Value = comp3Cards.get(0).getValues()[this.chosenCategory];
+			int comp4Value = comp4Cards.get(0).getValues()[this.chosenCategory];
 			
 			// For testing only, print out all cards being compared
 			System.out.println("\nEvery player's current card [0] being compared:\n");
-			System.out.println(humanCards[0].toString());
-			System.out.println(comp1Cards[0].toString());
-			System.out.println(comp2Cards[0].toString());
-			System.out.println(comp3Cards[0].toString());
-			System.out.println(comp4Cards[0].toString());
+			System.out.println(humanCards.get(0).toString());
+			System.out.println(comp1Cards.get(0).toString());
+			System.out.println(comp2Cards.get(0).toString());
+			System.out.println(comp3Cards.get(0).toString());
+			System.out.println(comp4Cards.get(0).toString());
 			
 			// For testing only, print out all values being compared
 			System.out.println("\nValues being compared:\n");
@@ -288,27 +316,27 @@ public class Deck {
 			// also set the ___LastWinner variable based on who wins the round using setAWinner() method
 			if ((humanValue > comp1Value) && (humanValue > comp2Value) 
 					&& (humanValue > comp3Value) && (humanValue > comp4Value)) {
-				System.out.printf("%nWinning card:%n" + humanCards[0].toString());
+				System.out.printf("%nWinning card:%n" + humanCards.get(0).toString());
 				setAWinner(0);
 				
 			} else if ((comp1Value > humanValue) && (comp1Value > comp2Value) 
 					&& (comp1Value > comp3Value) && (comp1Value > comp4Value)) {
-				System.out.printf("%nWinning card:%n" + comp1Cards[0].toString());
+				System.out.printf("%nWinning card:%n" + comp1Cards.get(0).toString());
 				setAWinner(1);
 				
 			} else if ((comp2Value > humanValue) && (comp2Value > comp1Value) 
 					&& (comp2Value > comp3Value) && (comp2Value > comp4Value)) {
-				System.out.printf("%nWinning card:%n" + comp2Cards[0].toString());
+				System.out.printf("%nWinning card:%n" + comp2Cards.get(0).toString());
 				setAWinner(2);
 				
 			} else if ((comp3Value > humanValue) && (comp3Value > comp1Value) 
 					&& (comp3Value > comp2Value) && (comp3Value > comp4Value)) {
-				System.out.printf("%nWinning card:%n" + comp3Cards[0].toString());
+				System.out.printf("%nWinning card:%n" + comp3Cards.get(0).toString());
 				setAWinner(3);
 				
 			} else if ((comp4Value > humanValue) && (comp4Value > comp1Value) 
 					&& (comp4Value > comp2Value) && (comp4Value > comp3Value)) {
-				System.out.printf("%nWinning card:%n" + comp4Cards[0].toString());
+				System.out.printf("%nWinning card:%n" + comp4Cards.get(0).toString());
 				setAWinner(4);
 				
 			} else { System.out.println("The round was a draw. Cards added to the dealer's pile.");
@@ -318,26 +346,78 @@ public class Deck {
 		
 		// Tested & working
 		public void assignRoundCards() {
+<<<<<<< HEAD
+=======
 			int arrayPos = 99; // 99 set as it is out of bounds (testing if statement)
 			// player who receives cards will have a fAP of 7 (in the demo) as their 0 position hasn't been overwritten yet
 			// it is overwritten in the moveCardsUp method, deleting the duplicate card from [0]
+>>>>>>> master
 			if (getDealerLastWinner() == true) {
-				arrayPos = findArrayPosition(5);
-				dealerCards[arrayPos] = humanCards[0];
-				humanCards[0] = null;
-				arrayPos++;
-				dealerCards[arrayPos] = comp1Cards[0];
-				comp1Cards[0] = null;
-				arrayPos++;
-				dealerCards[arrayPos] = comp2Cards[0];
-				comp2Cards[0] = null;
-				arrayPos++;
-				dealerCards[arrayPos] = comp3Cards[0];
-				comp3Cards[0] = null;
-				arrayPos++;
-				dealerCards[arrayPos] = comp4Cards[0];
-				comp4Cards[0] = null;
+				dealerCards.add(humanCards.get(0));
+				humanCards.remove(0);
+				dealerCards.add(comp1Cards.get(0));
+				comp1Cards.remove(0);
+				dealerCards.add(comp2Cards.get(0));
+				comp2Cards.remove(0);
+				dealerCards.add(comp3Cards.get(0));
+				comp3Cards.remove(0);
+				dealerCards.add(comp4Cards.get(0));
+				comp4Cards.remove(0);
 				} else if (getHumanLastWinner() == true) {
+<<<<<<< HEAD
+					// first move player's own current card to back of their deck
+					humanCards.add(humanCards.get(0));
+					// then other players' current cards are added
+					humanCards.add(comp1Cards.get(0));
+					comp1Cards.remove(0);
+					humanCards.add(comp2Cards.get(0));
+					comp2Cards.remove(0);
+					humanCards.add(comp3Cards.get(0));
+					comp3Cards.remove(0);
+					humanCards.add(comp4Cards.get(0));
+					comp4Cards.remove(0);
+
+					} else if (getComp1LastWinner() == true) {
+						comp1Cards.add(comp1Cards.get(0));
+						comp1Cards.add(humanCards.get(0));
+						humanCards.remove(0);
+						comp1Cards.add(comp2Cards.get(0));
+						comp2Cards.remove(0);
+						comp1Cards.add(comp3Cards.get(0));
+						comp3Cards.remove(0);
+						comp1Cards.add(comp4Cards.get(0));
+						comp4Cards.remove(0);
+						} else if (getComp2LastWinner() == true) {
+							comp2Cards.add(comp2Cards.get(0));
+							comp2Cards.add(humanCards.get(0));
+							humanCards.remove(0);
+							comp2Cards.add(comp1Cards.get(0));
+							comp1Cards.remove(0);
+							comp2Cards.add(comp3Cards.get(0));
+							comp3Cards.remove(0);
+							comp2Cards.add(comp4Cards.get(0));
+							comp4Cards.remove(0);
+							} else if (getComp3LastWinner() == true) {
+								comp3Cards.add(comp3Cards.get(0));
+								comp3Cards.add(humanCards.get(0));
+								humanCards.remove(0);
+								comp3Cards.add(comp1Cards.get(0));
+								comp1Cards.remove(0);
+								comp3Cards.add(comp2Cards.get(0));
+								comp2Cards.remove(0);
+								comp3Cards.add(comp4Cards.get(0));
+								comp4Cards.remove(0);
+								} else if (getComp4LastWinner() == true) {
+									comp4Cards.add(comp4Cards.get(0));
+									comp4Cards.add(humanCards.get(0));
+									humanCards.remove(0);
+									comp4Cards.add(comp1Cards.get(0));
+									comp1Cards.remove(0);
+									comp4Cards.add(comp2Cards.get(0));
+									comp2Cards.remove(0);
+									comp4Cards.add(comp3Cards.get(0));
+									comp3Cards.remove(0);
+=======
 					// run findArrayPosition before taking [0] card, so first null will not be [0]
 					arrayPos = findArrayPosition(0);
 					arrayPos++;
@@ -417,48 +497,43 @@ public class Deck {
 									comp3Cards[0] = null;
 									arrayPos++;
 									comp4Cards[arrayPos] = comp4Cards[0];
+>>>>>>> master
 								}
 			}
 		
 		// not fully tested (only 1 round played so far)
 		public void assignDealerCards() {
-			if ((getDealerLastWinner() == false) && (dealerCards[0] != null)) {
-				int startPos = 99; // 99 to throw out of bounds exception testing whether the if statements break
+			if ((getDealerLastWinner() == false) && (dealerCards.isEmpty() == false)) {
 				if (getHumanLastWinner() == true) {
-					startPos = findArrayPosition(0);
-					for (int i = 0; i < findArrayPosition(5); i++) {
-						humanCards[startPos] = dealerCards[i];
-						startPos++;
+					for (int i = 0; i < dealerCards.size(); i++) {
+						humanCards.add(dealerCards.get(i));
 						}
 				} else if (getComp1LastWinner() == true) {
-					startPos = findArrayPosition(1);
-					for (int i = 0; i < findArrayPosition(5); i++) {
-						comp1Cards[startPos] = dealerCards[i];
-						startPos++;}
+					for (int i = 0; i < dealerCards.size(); i++) {
+						comp1Cards.add(dealerCards.get(i));
+						}
 				} else if (getComp2LastWinner() == true) {
-					startPos = findArrayPosition(2);
-					for (int i = 0; i < findArrayPosition(5); i++) {
-						comp2Cards[startPos] = dealerCards[i];
-						startPos++;}
+					for (int i = 0; i < dealerCards.size(); i++) {
+						comp2Cards.add(dealerCards.get(i));
+						}
 				} else if (getComp3LastWinner() == true) {
-					startPos = findArrayPosition(3);
-					for (int i = 0; i < findArrayPosition(5); i++) {
-						comp3Cards[startPos] = dealerCards[i];
-						startPos++;}
+					for (int i = 0; i < dealerCards.size(); i++) {
+						comp3Cards.add(dealerCards.get(i));
+						}
 				} else if (getComp4LastWinner() == true) {
-					startPos = findArrayPosition(4);
-					for (int i = 0; i < findArrayPosition(5); i++) {
-						comp4Cards[startPos] = dealerCards[i];
-						startPos++;}
+					for (int i = 0; i < dealerCards.size(); i++) {
+						comp4Cards.add(dealerCards.get(i));
+						}
 				}
-				// after assigning cards, wipe the dealer's deck
-				for (int i = 0; i < findArrayPosition(5); i++) {
-					dealerCards[i] = null;
-					}
-				
+//				 after assigning cards, wipe the dealer's deck
+				for (int i = 0; i < dealerCards.size(); i++) {
+					dealerCards.remove(i);
+					}	
 				}
 		}
 		
+<<<<<<< HEAD
+=======
 	  // Tested & working
 	  public int findArrayPosition(int player) {
 		  int arrayPos = 99; // set to 9 (out of bounds) so a broken for loop will produce a clear error
@@ -508,6 +583,7 @@ public class Deck {
 		  }
 		  return arrayPos;
 	  }
+>>>>>>> master
 	  
 	  	// Tested & working
 		public void moveCardsUp() {
@@ -515,49 +591,49 @@ public class Deck {
 			// start at 0, assign card index pos 1 to index pos 0
 			// increment both, so now assign card index pos 2 to index pos 1
 			int newPosition = 0;
-			for (int i = 1; i < humanCards.length; i++) {
-				if (humanCards[i] != null) {
-				humanCards[newPosition] = humanCards[i];
-				humanCards[i] = null;
+			for (int i = 1; i < humanCards.size(); i++) {
+				if (humanCards.isEmpty() == false) {
+					humanCards.set(newPosition, humanCards.get(i));
+					humanCards.set(i, null);
 				newPosition++;
 				}
 			}
 			newPosition = 0;
-			for (int i = 1; i < comp1Cards.length; i++) {
-				if (comp1Cards[i] != null) {
-				comp1Cards[newPosition] = comp1Cards[i];
-				comp1Cards[i] = null;
+			for (int i = 1; i < comp1Cards.size(); i++) {
+				if (comp1Cards.get(i) != null) {
+					comp1Cards.set(newPosition, comp1Cards.get(i));
+					comp1Cards.set(i, null);
 				newPosition++;
 				}
 			}
 			newPosition = 0;
-			for (int i = 1; i < comp2Cards.length; i++) {
-				if (comp2Cards[i] != null) {
-				comp2Cards[newPosition] = comp2Cards[i];
-				comp2Cards[i] = null;
+			for (int i = 1; i < comp2Cards.size(); i++) {
+				if (comp2Cards.get(i) != null) {
+					comp2Cards.set(newPosition, comp2Cards.get(i));
+					comp2Cards.set(i, null);
 				newPosition++;
 				}
 			}
 			newPosition = 0;
-			for (int i = 1; i < comp3Cards.length; i++) {
-				if (comp3Cards[i] != null) {
-				comp3Cards[newPosition] = comp3Cards[i];
-				comp3Cards[i] = null;
+			for (int i = 1; i < comp3Cards.size(); i++) {
+				if (comp3Cards.get(i) != null) {
+					comp3Cards.set(newPosition, comp3Cards.get(i));
+					comp3Cards.set(i, null);
 				newPosition++;
 				}
 			}
 			newPosition = 0;
-			for (int i = 1; i < comp4Cards.length; i++) {
-				if (comp4Cards[i] != null) {
-				comp4Cards[newPosition] = comp4Cards[i];
-				comp4Cards[i] = null;
+			for (int i = 1; i < comp4Cards.size(); i++) {
+				if (comp4Cards.get(i) != null) {
+					comp4Cards.set(newPosition, comp4Cards.get(i));
+					comp4Cards.set(i, null);
 				newPosition++;
 				}
 			}
 		}
 
 	  
-	  public Player[] getPlayerList() {
+	  public ArrayList<Player> getPlayerList() {
 		  return playerList;
 	  }
 
@@ -566,33 +642,34 @@ public class Deck {
 	}
 
 	  public Card getUserCard() {
-	    return humanCards[0];
+	    return humanCards.get(0);
 	  }
 	  
-	  public Card[] getHumanCards() {
-		  return humanCards;
-	  }
-	  
-	  public Card[] getComp1Cards() {
-		  return comp1Cards;
-	  }
-	  
-	  public Card[] getComp2Cards() {
-		  return comp2Cards;
-	  }
-	  
-	  public Card[] getComp3Cards() {
-		  return comp3Cards;
-	  }
-	  
-	  public Card[] getComp4Cards() {
-		  return comp4Cards;
-	  }
-	  
+		  
 		public boolean getHumanLastWinner() {
 			return humanLastWinner;
 		}
 		
+		public Card getHumanCards(int index ) {
+			return humanCards.get(index);
+		}
+
+		public Card getComp1Cards(int index) {
+			return comp1Cards.get(index);
+		}
+
+		public Card getComp2Cards(int index) {
+			return comp2Cards.get(index);
+		}
+
+		public Card getComp3Cards(int index) {
+			return comp3Cards.get(index);
+		}
+
+		public Card getComp4Cards(int index) {
+			return comp4Cards.get(index);
+		}
+
 		public boolean getComp1LastWinner() {
 			return comp1LastWinner;
 		}
@@ -667,6 +744,24 @@ public class Deck {
 		
 		// FOR TESTING
 		public void showAllCards() {
+<<<<<<< HEAD
+			System.out.println(humanCards.get(0));
+			System.out.println(humanCards.get(1));
+			System.out.println(comp1Cards.get(0));
+			System.out.println(comp1Cards.get(1));
+			System.out.println(comp2Cards.get(0));
+			System.out.println(comp2Cards.get(1));
+			System.out.println(comp3Cards.get(0));
+			System.out.println(comp3Cards.get(1));
+			System.out.println(comp4Cards.get(0));
+			System.out.println(comp4Cards.get(1));
+		}
+		
+		public void addCards() {
+		}
+
+
+=======
 			System.out.println(humanCards[0]);
 			System.out.println(humanCards[1]);
 			System.out.println(comp1Cards[0]);
@@ -678,6 +773,7 @@ public class Deck {
 			System.out.println(comp4Cards[0]);
 			System.out.println(comp4Cards[1]);
 		}		
+>>>>>>> master
 
 	}
 

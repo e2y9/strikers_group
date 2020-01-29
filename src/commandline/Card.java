@@ -1,3 +1,5 @@
+/*This method basically creates a card which has a name and Categories */
+
 package commandline;
 
 public class Card {
