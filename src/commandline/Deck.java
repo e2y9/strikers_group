@@ -31,6 +31,7 @@ public class Deck {
 	  card8, card9, card10;
 
 
+	  // CHANGE deck to have an add player function rather than taking in a set number of players?
 	  public Deck(Player p1, Player p2, Player p3, Player p4, Player p5) {
 	    
 		cardDeck = new Card[10];
@@ -103,27 +104,26 @@ public class Deck {
 			}
 	  }
 	  
+	  // UPDATED dealDeck method
 	  public void dealDeck() {
-		  int deckPos = 0;
-		  for(int i = 0; i < 2; i++)
-			  
-			  
-		  {
-			  humanCards.add(cardDeck[deckPos]);
+		  ArrayList<ArrayList<Card>> temp = new ArrayList<ArrayList<Card>>();
+		  temp.add(humanCards);
+		  temp.add(comp1Cards);
+		  temp.add(comp2Cards);
+		  temp.add(comp3Cards);
+		  temp.add(comp4Cards);
+		  
+		  int deckPos = 0; // position in cardDeck
+		  int playerCount = 5; // number of active players
+		  int count = 2; // number of cards in deck divided by number of players 
+		  
+		  while (count > 0) {
+		  for(int i = 0; i < playerCount; i++) {
+			  temp.get(i).add(cardDeck[deckPos]);
 			  cardDeck[deckPos] = null;
 			  deckPos++;
-			  comp1Cards.add(cardDeck[deckPos]);
-			  cardDeck[deckPos] = null;
-			  deckPos++;
-			  comp2Cards.add(cardDeck[deckPos]);
-			  cardDeck[deckPos] = null;
-			  deckPos++;
-			  comp3Cards.add(cardDeck[deckPos]);
-			  cardDeck[deckPos] = null;
-			  deckPos++;
-			  comp4Cards.add(cardDeck[deckPos]);
-			  cardDeck[deckPos] = null;
-			  deckPos++;
+		  }
+		  count--;
 		  }
 	  }
 	  
@@ -322,79 +322,62 @@ public class Deck {
 			}
 		}
 		
-		// Tested & working
+		// UPDATED method with ArrayLists, so now we don't need moveCardsUp
 		public void assignRoundCards() {
-
-			int arrayPos = 99; // 99 set as it is out of bounds (testing if statement)
-			// player who receives cards will have a fAP of 7 (in the demo) as their 0 position hasn't been overwritten yet
-			// it is overwritten in the moveCardsUp method, deleting the duplicate card from [0]
+			ArrayList<ArrayList<Card>> temp = new ArrayList<ArrayList<Card>>();
+			temp.add(humanCards);
+			temp.add(comp1Cards);
+			temp.add(comp2Cards);
+			temp.add(comp3Cards);
+			temp.add(comp4Cards);
+			
+			// Create a Card array and add the current [0] position cards to it
+			// (extracted from the player decks in temp arraylist)
+			
+			ArrayList<Card> cardTemp = new ArrayList<Card>();
+			for (int i = 0; i < temp.size(); i++) {
+				cardTemp.add(temp.get(i).get(0));
+				temp.get(i).remove(0);
+			}
+			
+			// Shuffle the cards (required for project)
+			Random rdm = new Random();	
+			for (int i = 0; i < cardTemp.size(); i++) {
+				int rdmIndexPos = rdm.nextInt(cardTemp.size());
+				Card card = cardDeck[rdmIndexPos];
+				cardDeck[rdmIndexPos] = cardDeck[i];
+				cardDeck[i] = card;
+				}
+			
+			int playerCount = 5; // number of active players
 
 			if (getDealerLastWinner() == true) {
-				dealerCards.add(humanCards.get(0));
-				humanCards.remove(0);
-				dealerCards.add(comp1Cards.get(0));
-				comp1Cards.remove(0);
-				dealerCards.add(comp2Cards.get(0));
-				comp2Cards.remove(0);
-				dealerCards.add(comp3Cards.get(0));
-				comp3Cards.remove(0);
-				dealerCards.add(comp4Cards.get(0));
-				comp4Cards.remove(0);
+				for(int i = 0; i < playerCount; i++) {
+					dealerCards.add(cardTemp.get(i));
+					}
 				} else if (getHumanLastWinner() == true) {
-					// first move player's own current card to back of their deck
-					humanCards.add(humanCards.get(0));
-					// then other players' current cards are added
-					humanCards.add(comp1Cards.get(0));
-					comp1Cards.remove(0);
-					humanCards.add(comp2Cards.get(0));
-					comp2Cards.remove(0);
-					humanCards.add(comp3Cards.get(0));
-					comp3Cards.remove(0);
-					humanCards.add(comp4Cards.get(0));
-					comp4Cards.remove(0);
-
+					for(int i = 0; i < playerCount; i++) {
+						humanCards.add(cardTemp.get(i));
+						}
 					} else if (getComp1LastWinner() == true) {
-						comp1Cards.add(comp1Cards.get(0));
-						comp1Cards.add(humanCards.get(0));
-						humanCards.remove(0);
-						comp1Cards.add(comp2Cards.get(0));
-						comp2Cards.remove(0);
-						comp1Cards.add(comp3Cards.get(0));
-						comp3Cards.remove(0);
-						comp1Cards.add(comp4Cards.get(0));
-						comp4Cards.remove(0);
+						for(int i = 0; i < playerCount; i++) {
+							comp1Cards.add(cardTemp.get(i));
+							}
 						} else if (getComp2LastWinner() == true) {
-							comp2Cards.add(comp2Cards.get(0));
-							comp2Cards.add(humanCards.get(0));
-							humanCards.remove(0);
-							comp2Cards.add(comp1Cards.get(0));
-							comp1Cards.remove(0);
-							comp2Cards.add(comp3Cards.get(0));
-							comp3Cards.remove(0);
-							comp2Cards.add(comp4Cards.get(0));
-							comp4Cards.remove(0);
+							for(int i = 0; i < playerCount; i++) {
+								comp2Cards.add(cardTemp.get(i));
+								}
 							} else if (getComp3LastWinner() == true) {
-								comp3Cards.add(comp3Cards.get(0));
-								comp3Cards.add(humanCards.get(0));
-								humanCards.remove(0);
-								comp3Cards.add(comp1Cards.get(0));
-								comp1Cards.remove(0);
-								comp3Cards.add(comp2Cards.get(0));
-								comp2Cards.remove(0);
-								comp3Cards.add(comp4Cards.get(0));
-								comp4Cards.remove(0);
+								for(int i = 0; i < playerCount; i++) {
+									comp3Cards.add(cardTemp.get(i));
+									}
 								} else if (getComp4LastWinner() == true) {
-									comp4Cards.add(comp4Cards.get(0));
-									comp4Cards.add(humanCards.get(0));
-									humanCards.remove(0);
-									comp4Cards.add(comp1Cards.get(0));
-									comp1Cards.remove(0);
-									comp4Cards.add(comp2Cards.get(0));
-									comp2Cards.remove(0);
-									comp4Cards.add(comp3Cards.get(0));
-									comp3Cards.remove(0);
+									for(int i = 0; i < playerCount; i++) {
+										comp4Cards.add(cardTemp.get(i));
+										}
 									}
 			}
+		
 		
 		// not fully tested (only 1 round played so far)
 		public void assignDealerCards() {
@@ -427,55 +410,7 @@ public class Deck {
 				}
 		}
 		
-	  
-	  	// Tested & working
-		public void moveCardsUp() {
-			// move all playerCards[i] up one position in each array
-			// start at 0, assign card index pos 1 to index pos 0
-			// increment both, so now assign card index pos 2 to index pos 1
-			int newPosition = 0;
-			for (int i = 1; i < humanCards.size(); i++) {
-				if (humanCards.isEmpty() == false) {
-					humanCards.set(newPosition, humanCards.get(i));
-					humanCards.set(i, null);
-				newPosition++;
-				}
-			}
-			newPosition = 0;
-			for (int i = 1; i < comp1Cards.size(); i++) {
-				if (comp1Cards.get(i) != null) {
-					comp1Cards.set(newPosition, comp1Cards.get(i));
-					comp1Cards.set(i, null);
-				newPosition++;
-				}
-			}
-			newPosition = 0;
-			for (int i = 1; i < comp2Cards.size(); i++) {
-				if (comp2Cards.get(i) != null) {
-					comp2Cards.set(newPosition, comp2Cards.get(i));
-					comp2Cards.set(i, null);
-				newPosition++;
-				}
-			}
-			newPosition = 0;
-			for (int i = 1; i < comp3Cards.size(); i++) {
-				if (comp3Cards.get(i) != null) {
-					comp3Cards.set(newPosition, comp3Cards.get(i));
-					comp3Cards.set(i, null);
-				newPosition++;
-				}
-			}
-			newPosition = 0;
-			for (int i = 1; i < comp4Cards.size(); i++) {
-				if (comp4Cards.get(i) != null) {
-					comp4Cards.set(newPosition, comp4Cards.get(i));
-					comp4Cards.set(i, null);
-				newPosition++;
-				}
-			}
-		}
-
-	  
+	
 	  public ArrayList<Player> getPlayerList() {
 		  return playerList;
 	  }
@@ -493,7 +428,7 @@ public class Deck {
 			return humanLastWinner;
 		}
 		
-		public Card getHumanCards(int index ) {
+		public Card getHumanCards(int index) {
 			return humanCards.get(index);
 		}
 
@@ -598,11 +533,4 @@ public class Deck {
 			System.out.println(comp4Cards.get(0));
 			System.out.println(comp4Cards.get(1));
 		}
-		
-		public void addCards() {
-		}
-		
-
 	}
-
-
