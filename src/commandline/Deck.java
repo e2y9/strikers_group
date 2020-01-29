@@ -122,7 +122,7 @@ public class Deck {
 			  temp.get(i).add(cardDeck[deckPos]);
 			  cardDeck[deckPos] = null;
 			  deckPos++;
-		  }
+			  }
 		  count--;
 		  }
 	  }
