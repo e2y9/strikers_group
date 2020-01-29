@@ -103,10 +103,11 @@ public class Deck {
 			}
 	  }
 	  
-	  public void dealDeck()
-	  {
+	  public void dealDeck() {
 		  int deckPos = 0;
 		  for(int i = 0; i < 2; i++)
+			  
+			  
 		  {
 			  humanCards.add(cardDeck[deckPos]);
 			  cardDeck[deckPos] = null;
