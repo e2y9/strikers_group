@@ -5,10 +5,6 @@ public class TopTrumpsCLIApplication {
 
 	public static void main(String[] args) {
 		
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
 		 System.out.print("Welcome to Top Trumps!\n");
 		 
 		 	// initialise the game, creating 5 players with a card pile each (+ a dealer pile for commonPile cards)
@@ -51,7 +47,6 @@ public class TopTrumpsCLIApplication {
 		 	// if someone has won, assign all 5 current cards to the back of their deck (incl. their own current card)
 		 	newGame.getDeck().assignRoundCards();
 		 	// if there are cards in the dealer's deck (after a draw), assign them to the winner of the last round
-<<<<<<< HEAD
 //		 	newGame.getDeck().assignDealerCards();
 		 	
 //		    // TEST CARDS are in player decks
@@ -81,39 +76,15 @@ public class TopTrumpsCLIApplication {
 		 	System.out.println(newGame.getDeck().getComp2Cards(0).toString());
 		 	System.out.println(newGame.getDeck().getComp3Cards(0).toString());
 		 	System.out.println(newGame.getDeck().getComp4Cards(0).toString());
-=======
+
 		 	newGame.getDeck().assignDealerCards();
 		 	
-//		    // TEST CARDS are in player decks
-		 	System.out.println("\n\nWinner was player #" + newGame.getDeck().getWinnerNumber() + ", round cards assigned.");
-		 	System.out.println("\nArray Positions (first null found) after assignCards but before moveCardsUp: \n");
-		 	System.out.println("Human: " + newGame.getDeck().findArrayPosition(0));
-		 	System.out.println("Comp1: " + newGame.getDeck().findArrayPosition(1));
-		 	System.out.println("Comp2: " + newGame.getDeck().findArrayPosition(2));
-		 	System.out.println("Comp3: " + newGame.getDeck().findArrayPosition(3));
-		 	System.out.println("Comp4: " + newGame.getDeck().findArrayPosition(4));
-		 	System.out.println("Dealer: " + newGame.getDeck().findArrayPosition(5));
-		 	// moveCardsUp uses a loop to move card in array position 1 to position 0, then position 2 to position 1
-		 	// the method stops when it finds a null value (so that it doesn't write over the previous moved card)
-		 	newGame.getDeck().moveCardsUp();
-		 	System.out.println("\nArray Positions (first null found) after moving cards: \n");
-		 	System.out.println("Human: " + newGame.getDeck().findArrayPosition(0));
-		 	System.out.println("Comp1: " + newGame.getDeck().findArrayPosition(1));
-		 	System.out.println("Comp2: " + newGame.getDeck().findArrayPosition(2));
-		 	System.out.println("Comp3: " + newGame.getDeck().findArrayPosition(3));
-		 	System.out.println("Comp4: " + newGame.getDeck().findArrayPosition(4));
-		 	System.out.println("Dealer: " + newGame.getDeck().findArrayPosition(5));
-		 	
 		 	System.out.println("\nEvery player's new card[0] : \n");
-		 	System.out.println(newGame.getDeck().getHumanCards()[0].toString());
-		 	System.out.println(newGame.getDeck().getComp1Cards()[0].toString());
-		 	System.out.println(newGame.getDeck().getComp2Cards()[0].toString());
-		 	System.out.println(newGame.getDeck().getComp3Cards()[0].toString());
-		 	System.out.println(newGame.getDeck().getComp4Cards()[0].toString());
-=======
-		//Edited for git test
->>>>>>> Ashwin
->>>>>>> master
+		 	System.out.println(newGame.getDeck().getHumanCards(0).toString());
+		 	System.out.println(newGame.getDeck().getComp1Cards(0).toString());
+		 	System.out.println(newGame.getDeck().getComp2Cards(0).toString());
+		 	System.out.println(newGame.getDeck().getComp3Cards(0).toString());
+		 	System.out.println(newGame.getDeck().getComp4Cards(0).toString());
 	
 
 	}
