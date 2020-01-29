@@ -101,7 +101,7 @@ public class Deck {
 
       // Tested & Working
 	  public void dealDeck() {
-		  int deckPos = 0; // goes to 39
+		  int deckPos = 0;
 		  for (int i = 0; i < 2; i++) {
 		  humanCards[i] = cardDeck[deckPos];
 		  cardDeck[deckPos] = null;
@@ -319,7 +319,9 @@ public class Deck {
 		
 		// Tested & working
 		public void assignRoundCards() {
-			int arrayPos = 99; // 99 set as it is out of bounds (testing if stmnt)
+			int arrayPos = 99; // 99 set as it is out of bounds (testing if statement)
+			// player who receives cards will have a fAP of 7 (in the demo) as their 0 position hasn't been overwritten yet
+			// it is overwritten in the moveCardsUp method, deleting the duplicate card from [0]
 			if (getDealerLastWinner() == true) {
 				arrayPos = findArrayPosition(5);
 				dealerCards[arrayPos] = humanCards[0];
@@ -337,9 +339,8 @@ public class Deck {
 				dealerCards[arrayPos] = comp4Cards[0];
 				comp4Cards[0] = null;
 				} else if (getHumanLastWinner() == true) {
+					// run findArrayPosition before taking [0] card, so first null will not be [0]
 					arrayPos = findArrayPosition(0);
-					// first move player's own current card to back of their deck
-					humanCards[arrayPos] = humanCards[0];
 					arrayPos++;
 					// then other players' current cards are added
 					humanCards[arrayPos] = comp1Cards[0];
@@ -353,11 +354,12 @@ public class Deck {
 					arrayPos++;
 					humanCards[arrayPos] = comp4Cards[0];
 					comp4Cards[0] = null;
+					arrayPos++;
+					// move player's own current card to back of their deck
+					humanCards[arrayPos] = humanCards[0];
 
 					} else if (getComp1LastWinner() == true) {
 						arrayPos = findArrayPosition(1);
-						comp1Cards[arrayPos] = comp1Cards[0];
-						arrayPos++;
 						comp1Cards[arrayPos] = humanCards[0];
 						humanCards[0] = null;
 						arrayPos++;
@@ -369,10 +371,10 @@ public class Deck {
 						arrayPos++;
 						comp1Cards[arrayPos] = comp4Cards[0];
 						comp4Cards[0] = null;
+						arrayPos++;
+						comp1Cards[arrayPos] = comp1Cards[0];
 						} else if (getComp2LastWinner() == true) {
 							arrayPos = findArrayPosition(2);
-							comp2Cards[arrayPos] = comp2Cards[0];
-							arrayPos++;
 							comp2Cards[arrayPos] = humanCards[0];
 							humanCards[0] = null;
 							arrayPos++;
@@ -385,10 +387,9 @@ public class Deck {
 							comp2Cards[arrayPos] = comp4Cards[0];
 							comp4Cards[0] = null;
 							arrayPos++;
+							comp2Cards[arrayPos] = comp2Cards[0];
 							} else if (getComp3LastWinner() == true) {
 								arrayPos = findArrayPosition(3);
-								comp3Cards[arrayPos] = comp3Cards[0];
-								arrayPos++;
 								comp3Cards[arrayPos] = humanCards[0];
 								humanCards[0] = null;
 								arrayPos++;
@@ -401,10 +402,9 @@ public class Deck {
 								comp3Cards[arrayPos] = comp4Cards[0];
 								comp4Cards[0] = null;
 								arrayPos++;
+								comp3Cards[arrayPos] = comp3Cards[0];
 								} else if (getComp4LastWinner() == true) {
 									arrayPos = findArrayPosition(4);
-									comp4Cards[arrayPos] = comp4Cards[0];
-									arrayPos++;
 									comp4Cards[arrayPos] = humanCards[0];
 									humanCards[0] = null;
 									arrayPos++;
@@ -417,9 +417,11 @@ public class Deck {
 									comp4Cards[arrayPos] = comp3Cards[0];
 									comp3Cards[0] = null;
 									arrayPos++;
+									comp4Cards[arrayPos] = comp4Cards[0];
 								}
 			}
 		
+		// not fully tested (only 1 round played so far)
 		public void assignDealerCards() {
 			if ((getDealerLastWinner() == false) && (dealerCards[0] != null)) {
 				int startPos = 99; // 99 to throw out of bounds exception testing whether the if statements break
@@ -460,7 +462,7 @@ public class Deck {
 		
 	  // Tested & working
 	  public int findArrayPosition(int player) {
-		  int arrayPos = 99; // set to 40 (out of bounds) so a broken for loop will produce a clear error
+		  int arrayPos = 99; // set to 9 (out of bounds) so a broken for loop will produce a clear error
 	 
 		  if (player == 0) {
 			  for (int i = 0; i < humanCards.length; i++) {
@@ -676,12 +678,7 @@ public class Deck {
 			System.out.println(comp3Cards[1]);
 			System.out.println(comp4Cards[0]);
 			System.out.println(comp4Cards[1]);
-		}
-		
-		public void addCards() {
-		}
-
-
+		}		
 
 	}
 
