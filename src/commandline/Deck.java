@@ -50,7 +50,6 @@ public class Deck {
 	    comp4Cards  = new  ArrayList<Card>();
 	    dealerCards  = new  ArrayList<Card>();
 	    
-	    
 	    chosenCategory = 99;
 	    winner = 0;
 	    
@@ -118,7 +117,9 @@ public class Deck {
 		  int count = 2; // number of cards in deck divided by number of players 
 		  
 		  while (count > 0) {
+			  // use playerCount to set how many different players to give cards to
 		  for(int i = 0; i < playerCount; i++) {
+			  // get a player's card deck, add a card from the cardDeck to it
 			  temp.get(i).add(cardDeck[deckPos]);
 			  cardDeck[deckPos] = null;
 			  deckPos++;
@@ -191,75 +192,45 @@ public class Deck {
 			}
 		}
 	  
-	  // Tested & Working
+		// UPDATED method with ArrayLists
 	  public int chooseACategory(int player) {
-		 int[] categoryArray = new int[5];
-		 int intelligence = 99;
-		 int speed = 99;
-		 int strength = 99;
-		 int agility = 99;
-		 int combat = 99;
-		 
-		 if (player == 0) {
-			 System.out.print("Human category chosen elsewhere.");
-		 } else if (player == 1) {
-			 intelligence = comp1Cards.get(0).getValues()[0];
-			 speed = comp1Cards.get(0).getValues()[1];
-			 strength = comp1Cards.get(0).getValues()[2];
-			 agility = comp1Cards.get(0).getValues()[3];
-			 combat = comp1Cards.get(0).getValues()[4];
-		 } else if (player == 2) {
-			 intelligence = comp2Cards.get(0).getValues()[0];
-			 speed = comp2Cards.get(0).getValues()[1];
-			 strength = comp2Cards.get(0).getValues()[2];
-			 agility = comp2Cards.get(0).getValues()[3];
-			 combat = comp2Cards.get(0).getValues()[4];
-		 } else if (player == 3) {
-			 intelligence = comp3Cards.get(0).getValues()[0];
-			 speed = comp3Cards.get(0).getValues()[1];
-			 strength = comp3Cards.get(0).getValues()[2];
-			 agility = comp3Cards.get(0).getValues()[3];
-			 combat = comp3Cards.get(0).getValues()[4];
-		 } else if (player == 4) {
-			 intelligence = comp4Cards.get(0).getValues()[0];
-			 speed = comp4Cards.get(0).getValues()[1];
-			 strength = comp4Cards.get(0).getValues()[2];
-			 agility = comp4Cards.get(0).getValues()[3];
-			 combat = comp4Cards.get(0).getValues()[4];
-		 }
+		  ArrayList<ArrayList<Card>> temp = new ArrayList<ArrayList<Card>>();
+		  temp.add(humanCards);
+		  temp.add(comp1Cards);
+		  temp.add(comp2Cards);
+		  temp.add(comp3Cards); 
+		  temp.add(comp4Cards);
+		  
+		  // store the card values from the player's 0 card in an array (value 0 = intelligence, 1 = agility ..)
+		  int[] tempValues = new int[5];
+		  for (int i = 0; i < 5; i++) {
+			  tempValues[i] = temp.get(player).get(0).getValues()[i];
+			  }
 
-		 categoryArray[0] = intelligence;
-		 categoryArray[1] = speed;
-		 categoryArray[2] = strength;
-		 categoryArray[3] = agility;
-		 categoryArray[4] =	combat;
-		 
-		 // find the highest values on the comp player's card
-		 // set max to first int in the array
-		 int max = categoryArray[0];	
+		  int max = tempValues[0];	
 		 // set starting index position to be 1 higher than max's [0] position in the array
 		 // loop through array until end, comparing max to other numbers and storing highest number as max
-		 for (int i = 1; i < categoryArray.length; i++) {
-			 if (categoryArray[i] > max) {
-				 max = categoryArray[i];
+		  for (int i = 1; i < tempValues.length; i++) {
+			 if (tempValues[i] > max) {
+				 max = tempValues[i];
+				 }
 			 }
-		 }
-		 // now check which stored card value matches max, and return the corresponding category number
-		 // as this method is automatically called by whoChoosesCategory, the return values are passed 
-		 // into the previous method (whoChoosescategory) and are used to update the chosenCategory int
-		 if (max == intelligence) {
+		 // now check which value (still in order 0-4, intelligence to combat) matches max
+		 // this method is called by whoChoosesCategory, so the return value is passed back to that method to set category
+		 if (max == tempValues[0]) {
 			 return 0;
-			 } else if (max == speed) {
+			 } else if (max == tempValues[1]) {
 			 return 1;
-			 } else if (max == strength) {
+			 } else if (max == tempValues[2]) {
 			 return 2;
-			 } else if (max == agility) {
+			 } else if (max == tempValues[3]) {
 			 return 3;
-			 } else if (max == combat) {
+			 } else if (max == tempValues[4]) {
 			 return 4;
 			 } else { return 99; } // return 99 (out of bounds) in result of an error 
 		 }
 		
+	  
 		// Tested & Working
 		public void compareValues() {
 			// assign chosen category values (chooseCategory method returns an int, used to set chosenCategory) 
@@ -271,23 +242,23 @@ public class Deck {
 			int comp3Value = comp3Cards.get(0).getValues()[this.chosenCategory];
 			int comp4Value = comp4Cards.get(0).getValues()[this.chosenCategory];
 			
-			// For testing only, print out all cards being compared
-			System.out.println("\nEvery player's current card [0] being compared:\n");
-			System.out.println(humanCards.get(0).toString());
-			System.out.println(comp1Cards.get(0).toString());
-			System.out.println(comp2Cards.get(0).toString());
-			System.out.println(comp3Cards.get(0).toString());
-			System.out.println(comp4Cards.get(0).toString());
-			
-			// For testing only, print out all values being compared
-			System.out.println("\nValues being compared:\n");
-			System.out.println(humanValue);
-			System.out.println(comp1Value);
-			System.out.println(comp2Value);
-			System.out.println(comp3Value);
-			System.out.println(comp4Value);
-
-			
+//			// TESTING: print out all cards being compared
+//			System.out.println("\nEvery player's current card [0] being compared:\n");
+//			System.out.println(humanCards.get(0).toString());
+//			System.out.println(comp1Cards.get(0).toString());
+//			System.out.println(comp2Cards.get(0).toString());
+//			System.out.println(comp3Cards.get(0).toString());
+//			System.out.println(comp4Cards.get(0).toString());
+//			
+//			// TESTING:  print out all values being compared
+//			System.out.println("\nValues being compared:\n");
+//			System.out.println(humanValue);
+//			System.out.println(comp1Value);
+//			System.out.println(comp2Value);
+//			System.out.println(comp3Value);
+//			System.out.println(comp4Value);
+//
+//			
 			// check which player has the highest value 
 			// print the winning card to the screen
 			// or, if draw, notify players that the dealer is holding onto the cards

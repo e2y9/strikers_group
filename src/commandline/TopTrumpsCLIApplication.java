@@ -29,7 +29,7 @@ public class TopTrumpsCLIApplication {
 		 	
 		 	// change the int in the setAWinner method (0-4) to test different category choosers 
 		 	// (otherwise it's auto-set to human for round 1)
-		 	// newGame.getDeck().setAWinner(1);
+//		 	 newGame.getDeck().setAWinner(1);
 		 	// ^ un-mute the above line for testing ^
 		 	
 		 	// the getAWinner method checks all the booleans at the top of the Deck class (humanLastWinner etc)
@@ -49,9 +49,6 @@ public class TopTrumpsCLIApplication {
 		 	// if there are cards in the dealer's deck (after a draw), assign them to the winner of the last round
 		 	newGame.getDeck().assignDealerCards();
 		 
-		 	
-
-		 	newGame.getDeck().assignDealerCards();
 		 	
 		 	System.out.println("\nEvery player's new card[0] : \n");
 		 	System.out.println(newGame.getDeck().getHumanCards(0).toString());
