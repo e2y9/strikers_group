@@ -5,6 +5,7 @@ import java.io.FileReader;
 public class TopTrumpsCLIApplication {
 
 	public static void main(String[] args) {
+		boolean userWantsToQuit = false;
 		
 		Players players = new Players();
 		Player p1 = new HumanPlayer("Ashwin");
@@ -26,21 +27,29 @@ public class TopTrumpsCLIApplication {
 		 game.shuffleDeck();
 		 game.dealDeck();
 //		 game.printDeck();
-		 System.out.println("Player 1 deck");
-		 p1.getPlayerDeck().displayDeck();
+//		 System.out.println("Player 1 deck");
+//		 p1.getPlayerDeck().displayDeck();
 //		 game.displayAllPLayersTopCard();
 		 
 		 
-		 while(game.getPlayersList().getPlayers().size()!= 1)
+		 while(game.getPlayersList().getPlayers().size()!=1)
 		 {
-			 game.playRound();
-			 game.transferCards();
-			 game.lostPlayer();
-			 game.displayAllPLayersTopCard();
-			 
+			 if(userWantsToQuit == false)
+			 {
+	//			 game.displayAllPLayersTopCard();
+				 System.out.println("Player 1 deck");
+				 p1.getPlayerDeck().displayDeck();
+				 game.playRound();
+				 game.transferCards();
+				 game.lostPlayer();
+				 game.displayAllPLayersTopCard();
+			 }
+			 else
+			 {
+				 System.out.println("Thank you for Playing the game.");
+				 break;
+			 }
 		 }
-		 
-
 	}
 
 }
