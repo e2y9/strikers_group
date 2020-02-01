@@ -4,9 +4,9 @@ package commandline;
 
 public class Card {
 
-	  String name;
-	  String[] cardCategories;
-	  int[] cardValues;
+	  private String name;
+	  private String[] cardCategories;
+	  private int[] cardValues;
 	  
 	  
 	  public Card() {
@@ -35,6 +35,11 @@ public class Card {
 	    		this.cardCategories[1], this.cardValues[1], this.cardCategories[2], this.cardValues[2],
 	    		this.cardCategories[3], this.cardValues[3], this.cardCategories[4], this.cardValues[4]);
 	    return card;
+	  }
+	  
+	  public int getValue(int category)
+	  {
+		  return this.cardValues[category];
 	  }
 
 	  public String getName() {

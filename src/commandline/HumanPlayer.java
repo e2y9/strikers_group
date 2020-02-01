@@ -4,14 +4,20 @@ import java.util.Scanner;
 
 public class HumanPlayer implements Player {
 
-	  String name;
+	  private String name;
+	  private DeckOfCards playerDeck;
 
 
-	  public HumanPlayer() {		  
+	  public HumanPlayer(String name) 
+	  {
+		  this.name = name;
+		  playerDeck = new DeckOfCards();
 	  }
 	  
-	  
-	  @Override
+
+
+
+	@Override
 	  public int chooseCategory() {
 		  int catNum = 0;
 		  try {
@@ -31,12 +37,31 @@ public class HumanPlayer implements Player {
 		  }
 		  return catNum;
 	  }
-
-
+	
+	public String topCard()
+	{
+		String result = "";
+		if(playerDeck.getDeck().isEmpty())
+		{
+			result = "";
+		}
+		else
+		{
+			result = playerDeck.getTopCard();
+		}
+		return result;
+	}
+	
 	public String getName() {
 		  return name;
 	  }
+
+
+
+
 	
-
-
+	public DeckOfCards getPlayerDeck() {
+		return playerDeck;
+	}
+			
 }
