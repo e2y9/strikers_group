@@ -3,11 +3,14 @@ package commandline;
 
 public class CompPlayer implements Player {
 
-	  String name;
+	 private String name;
+	 private DeckOfCards playerDeck;
 
 
-	  public CompPlayer() {		  
-
+	public CompPlayer(String name) 
+	  {		  
+		  this.name = name;
+		  playerDeck = new DeckOfCards();
 	  }
 	
 
@@ -21,6 +24,22 @@ public class CompPlayer implements Player {
 		return 0;
 	}
 	
-
+	public String topCard()
+	{
+		String result = "";
+		if(playerDeck.getDeck().isEmpty())
+		{
+			result = "";
+		}
+		else
+		{
+			result = playerDeck.getTopCard();
+		}
+		return result;
+	}
+	
+	 public DeckOfCards getPlayerDeck() {
+			return playerDeck;
+		}
 }
 

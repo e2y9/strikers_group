@@ -1,10 +1,9 @@
 package commandline;
 
-interface Player {
-
+interface Player { 
 	  public String getName();
 	  public int chooseCategory();
-	  
+	  public DeckOfCards getPlayerDeck();
 	  }
 
 

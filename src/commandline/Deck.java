@@ -193,7 +193,8 @@ public class Deck {
 		}
 	  
 		// UPDATED method with ArrayLists
-	  public int chooseACategory(int player) {
+	  public int chooseACategory(int player)
+	  {
 		  ArrayList<ArrayList<Card>> temp = new ArrayList<ArrayList<Card>>();
 		  temp.add(humanCards);
 		  temp.add(comp1Cards);
@@ -203,32 +204,48 @@ public class Deck {
 		  
 		  // store the card values from the player's 0 card in an array (value 0 = intelligence, 1 = agility ..)
 		  int[] tempValues = new int[5];
-		  for (int i = 0; i < 5; i++) {
+		  for (int i = 0; i < 5; i++)
+		  {
 			  tempValues[i] = temp.get(player).get(0).getValues()[i];
-			  }
+		  }
 
 		  int max = tempValues[0];	
 		 // set starting index position to be 1 higher than max's [0] position in the array
 		 // loop through array until end, comparing max to other numbers and storing highest number as max
-		  for (int i = 1; i < tempValues.length; i++) {
-			 if (tempValues[i] > max) {
+		  for (int i = 1; i < tempValues.length; i++) 
+		  {
+			 if (tempValues[i] > max) 
+			 {
 				 max = tempValues[i];
-				 }
 			 }
+		 }
 		 // now check which value (still in order 0-4, intelligence to combat) matches max
 		 // this method is called by whoChoosesCategory, so the return value is passed back to that method to set category
-		 if (max == tempValues[0]) {
+		 if (max == tempValues[0])
+		 {
 			 return 0;
-			 } else if (max == tempValues[1]) {
-			 return 1;
-			 } else if (max == tempValues[2]) {
-			 return 2;
-			 } else if (max == tempValues[3]) {
-			 return 3;
-			 } else if (max == tempValues[4]) {
-			 return 4;
-			 } else { return 99; } // return 99 (out of bounds) in result of an error 
 		 }
+		 else if (max == tempValues[1])
+		 {
+			 return 1;
+		 } 
+		 else if (max == tempValues[2]) 
+		 {
+			 return 2;
+		 } 
+		 else if (max == tempValues[3]) 
+		 {
+			 return 3;
+		 } 
+		 else if (max == tempValues[4]) 
+		 {
+			 return 4;	 
+		 }
+		 else 
+		 { 
+			 return 99;
+		 } // return 99 (out of bounds) in result of an error 
+	  }
 		
 	  
 		// Tested & Working
@@ -237,19 +254,19 @@ public class Deck {
 			// values assigned to 1 int per player
 			// index pos [0] is every player's current card
 			int humanValue = humanCards.get(0).getValues()[this.chosenCategory];
-			int comp1Value = comp1Cards.get(0).getValues()[this.chosenCategory];
+			int comp1Value = humanCards.get(0).getValues()[this.chosenCategory];
 			int comp2Value = comp2Cards.get(0).getValues()[this.chosenCategory];
 			int comp3Value = comp3Cards.get(0).getValues()[this.chosenCategory];
 			int comp4Value = comp4Cards.get(0).getValues()[this.chosenCategory];
 			
-//			// TESTING: print out all cards being compared
+//			//TESTING: print out all cards being compared
 //			System.out.println("\nEvery player's current card [0] being compared:\n");
 //			System.out.println(humanCards.get(0).toString());
 //			System.out.println(comp1Cards.get(0).toString());
 //			System.out.println(comp2Cards.get(0).toString());
 //			System.out.println(comp3Cards.get(0).toString());
 //			System.out.println(comp4Cards.get(0).toString());
-//			
+			
 //			// TESTING:  print out all values being compared
 //			System.out.println("\nValues being compared:\n");
 //			System.out.println(humanValue);
@@ -257,7 +274,7 @@ public class Deck {
 //			System.out.println(comp2Value);
 //			System.out.println(comp3Value);
 //			System.out.println(comp4Value);
-//
+
 //			
 			// check which player has the highest value 
 			// print the winning card to the screen
@@ -293,7 +310,8 @@ public class Deck {
 			}
 		}
 		
-		// UPDATED method with ArrayLists, so now we don't need moveCardsUp
+		// UPDATED method with ArrayLists, so now we don't need moveCardsUp  
+		// Why are we using temp arraylist?
 		public void assignRoundCards() {
 			ArrayList<ArrayList<Card>> temp = new ArrayList<ArrayList<Card>>();
 			temp.add(humanCards);

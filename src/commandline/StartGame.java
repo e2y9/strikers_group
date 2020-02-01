@@ -17,18 +17,18 @@ public class StartGame {
 	
 	
 	public StartGame() {
-	    human = new HumanPlayer();
-	    comp1 = new CompPlayer();
-	    comp2 = new CompPlayer();
-	    comp3 = new CompPlayer();
-	    comp4 = new CompPlayer();
-	    dealer = new CompPlayer();
+	    human = new HumanPlayer("Ashwin");
+	    comp1 = new CompPlayer("Comp Player 1");
+	    comp2 = new CompPlayer("Comp Player 2");
+	    comp3 = new CompPlayer("Comp Player 3");
+	    comp4 = new CompPlayer("Comp Player 4");
+	    dealer = new CompPlayer("Dealer");
 	    deck = new Deck(human, comp1, comp2, comp3, comp4);
 
 		// load cards into deck
 	    try {
 	    	// file address is set to Emmet's computer - change url below for own machine
-	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\template_project\\strikers_group\\src\\commandline\\MarvelDeck.txt");
+	    	FileReader fr = new FileReader("C:\\Users\\Ashwin\\Documents\\Glasgow\\Master Project IT\\Emmet Repo\\strikers_group\\src\\commandline\\MarvelDeck.txt");
 	    	deck.loadCards(fr);
 	    }catch (FileNotFoundException e) {
 	      System.out.print("File not found.");
@@ -41,6 +41,6 @@ public class StartGame {
 	public Deck getDeck() {
 		return this.deck;
 	}
-
+	
 
 }
