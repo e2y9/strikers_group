@@ -27,6 +27,7 @@ public class HumanPlayer implements Player {
 			  System.out.println("2 - Strength");
 			  System.out.println("3 - Agility");
 			  System.out.println("4 - Combat");
+//			  System.out.println("5 - Quit");
 			  System.out.println("");
 			  Scanner s = new Scanner(System.in);
 			  String category = s.nextLine();

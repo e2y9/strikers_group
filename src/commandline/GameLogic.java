@@ -12,6 +12,7 @@ public class GameLogic {
 	private Players playersList;
 	private DeckOfCards allCards;
 	private Player winnerOfRound;
+	private DeckOfCards commonPile;
 	
 
 	public GameLogic(Players players)
@@ -113,7 +114,7 @@ public class GameLogic {
 				}
 				else if(card1Value == card2Value)
 				{
-					System.out.println("It's a draw case");
+					System.out.println("It's a draw case Card1Value " + card1Value + " Card2Value " + card2Value );
 				}
 				
 			}
@@ -139,8 +140,8 @@ public class GameLogic {
 	
 	public void displayAllPLayersTopCard()
 	{
-		
-		for(int i=0; i<playersList.getPlayers().size(); i++)
+		int sizeOfList = playersList.getPlayers().size();
+		for(int i=0; i<sizeOfList; i++)
 		{
 			System.out.println("\n" + playersList.getPlayers().get(i).getName());
 			System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getTopCard());
@@ -150,21 +151,52 @@ public class GameLogic {
 	public void playRound()
 	{
 		roundWinner();
-		whoChooseCategory();
-		System.out.println("\n"+ getWinnerOfRound() + "won the round and will choose the category of next card");
-		System.out.println("\n All players top card");
-		displayAllPLayersTopCard();
+//		whoChooseCategory();
+		System.out.println("\n"+ getWinnerOfRound() + " won the round and will choose the category of next card");
+//		System.out.println("\n All players top card");
+//		displayAllPLayersTopCard();
 	}
 	
 	public void lostPlayer()
 	{
-		for(int i=0; i<playersList.getPlayers().size(); i++)
+		int index = 0;
+		int sizeOfList = playersList.getPlayers().size(); //5
+		Players playersToRemove = new Players();
+		for(int i=0; i<sizeOfList; i++)
 		{
-			if(playersList.getPlayers().get(i).getPlayerDeck().getDeck().isEmpty())
+			if(playersList.getPlayers().size() > 1 )
 			{
-				playersList.getPlayers().remove(i);
+				System.out.println("index " + i);
+				if(playersList.getPlayers().get(i).getPlayerDeck().getDeck().isEmpty())
+				{
+					playersList.getPlayers().get(i).getPlayerDeck().setNumOfCards(0);
+				}
+			}
+			else
+			{
+				System.out.println(playersList.getPlayers().get(i).getName() + " won the game");
+				break;
 			}
 		}
+//		for(Player element: playersList.getPlayers())
+//		{
+//			if(playersToRemove.getPlayers().isEmpty() == false)
+//			{
+//				if(element.equals(playersToRemove.getPlayers().get(index)) && index < playersToRemove.getPlayers().size())
+//				{
+//					playersList.getPlayers().remove(element);
+//					index++;
+//				}
+//			}
+//		}
+			for(Player p: playersList.getPlayers())
+			{
+				if(p.getPlayerDeck().getNumberOfCards() == 0)
+				{
+					playersList.getPlayers().remove(p);
+				}
+			}
+		System.out.println(playersList.allPlayersName());
 		
 	}
 
@@ -175,29 +207,43 @@ public class GameLogic {
 	//I think cards need to be shuffled before adding to winners deck
 	public void transferCards()
 	{
+		int playersListSize = playersList.getPlayers().size();
 		int tempSize =0;
 		DeckOfCards temp = new DeckOfCards();
-		for(int i=0; i<playersList.getPlayers().size(); i++)
+		for(int i=0; i<playersListSize; i++)
 		{
-			System.out.println("adding to temp and removing top cards i " + i);
+//			System.out.println("adding to temp and removing top cards i " + i);
 			temp.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
-			System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
+//			System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
 			playersList.getPlayers().get(i).getPlayerDeck().getDeck().remove(0);
 		}
 		
+		this.shuffleHand(temp);
 		tempSize = temp.getDeck().size();
-		for(int i=0; i<playersList.getPlayers().size(); i++) //5
+		for(int i=0; i<playersListSize; i++) //5
 		{
 			if(playersList.getPlayers().get(i).equals(winnerOfRound)) 
 			{
 				for(int j=0; j<tempSize; j++) //5
 				{
-					System.out.println("adding to deck and removing temp i " + i + " j " +j );
-					System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0)));
+//					System.out.println("adding to deck and removing temp i " + i + " j " +j );
+//					System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0)));
+					playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0));
 					temp.getDeck().remove(0);
 				}
 			}
 			
+		}
+	}
+	public void shuffleHand(DeckOfCards cards)
+	{
+		Random randomInteger = new Random();
+		for(int i=0; i<cards.getDeck().size(); i++)
+		{
+			int randomIndexPosition = randomInteger.nextInt(cards.getDeck().size());
+			Card temp = cards.getDeck().get(randomIndexPosition);
+			cards.getDeck().set(randomIndexPosition, cards.getDeck().get(i));
+			cards.getDeck().set(i, temp);
 		}
 	}
 
