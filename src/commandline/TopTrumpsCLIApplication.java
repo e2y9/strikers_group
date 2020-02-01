@@ -28,7 +28,7 @@ public class TopTrumpsCLIApplication {
 //		 game.printDeck();
 		 System.out.println("Player 1 deck");
 		 p1.getPlayerDeck().displayDeck();
-		 game.displayAllPLayersTopCard();
+//		 game.displayAllPLayersTopCard();
 		 
 		 
 		 while(game.getPlayersList().getPlayers().size()!= 1)

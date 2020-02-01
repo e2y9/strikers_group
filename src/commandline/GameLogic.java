@@ -100,19 +100,20 @@ public class GameLogic {
 			{
 				card1Value = playersList.getCardValue(i, chosenCategory);
 				card2Value = playersList.getCardValue(i+1, chosenCategory);
-				if(card1Value > card2Value &&  card1Value > temp && card2Value > temp )
+				if(card1Value > card2Value &&  card1Value >= temp)
 				{
 					temp = card1Value;
 					winnerOfRound = playersList.getPlayers().get(i);
 
 				}
+				else if(card1Value <card2Value && card2Value >= temp)
+				{
+					temp = card2Value;
+					winnerOfRound = playersList.getPlayers().get(i+1);
+				}
 				else if(card1Value == card2Value)
 				{
 					System.out.println("It's a draw case");
-				}
-				else
-				{
-					winnerOfRound = playersList.getPlayers().get(i+1);
 				}
 				
 			}
@@ -174,20 +175,25 @@ public class GameLogic {
 	//I think cards need to be shuffled before adding to winners deck
 	public void transferCards()
 	{
+		int tempSize =0;
 		DeckOfCards temp = new DeckOfCards();
 		for(int i=0; i<playersList.getPlayers().size(); i++)
 		{
+			System.out.println("adding to temp and removing top cards i " + i);
 			temp.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
+			System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
 			playersList.getPlayers().get(i).getPlayerDeck().getDeck().remove(0);
 		}
 		
-		for(int i=0; i<playersList.getPlayers().size(); i++)
+		tempSize = temp.getDeck().size();
+		for(int i=0; i<playersList.getPlayers().size(); i++) //5
 		{
-			if(playersList.getPlayers().get(i).equals(winnerOfRound))
+			if(playersList.getPlayers().get(i).equals(winnerOfRound)) 
 			{
-				for(int j=0; j<temp.getDeck().size(); j++)
+				for(int j=0; j<tempSize; j++) //5
 				{
-					playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0));
+					System.out.println("adding to deck and removing temp i " + i + " j " +j );
+					System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0)));
 					temp.getDeck().remove(0);
 				}
 			}
