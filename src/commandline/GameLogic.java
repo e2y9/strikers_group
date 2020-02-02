@@ -251,4 +251,12 @@ public class GameLogic {
 		}
 		return result;
 	}
+	
+	public void displayWinnerDeck()
+	{
+		for(int i=0; i<winnerOfRound.getPlayerDeck().getDeck().size(); i++)
+		{
+			System.out.println(winnerOfRound.getPlayerDeck().getDeck().get(i).toString());
+		}
+	}
 }
