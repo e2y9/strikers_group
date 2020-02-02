@@ -1,5 +1,3 @@
-//Why use these methods in deck.java  1)assign roundCards 2) assign dealer cards
-
 package commandline;
 
 import java.io.FileNotFoundException;
@@ -13,6 +11,8 @@ public class GameLogic {
 	private DeckOfCards allCards;
 	private Player winnerOfRound;
 	private DeckOfCards commonPile;
+	private int totalNumberOfDraws = 0;
+	private static int gameId = 0;
 	
 
 	public GameLogic(Players players)
@@ -29,6 +29,8 @@ public class GameLogic {
 	      System.out.print("File not found.");
 	    }
 		winnerOfRound = playersList.getPlayers().get(0);
+	
+		gameId++;
 		
 	}
 	
@@ -87,40 +89,43 @@ public class GameLogic {
 		}
 	}
 	
-	//Work on the draw case and improve  winner case.
-	public Player roundWinner()
+	public void roundWinner()
 	{
+		int category = winnerOfRound.chooseCategory();
 		int temp = 0;
-		int card1Value=0;
-		int card2Value=0;
-		int chosenCategory = winnerOfRound.chooseCategory();
-		int playersLeft = playersList.getPlayers().size();
-		if(playersLeft > 0)
+		if(lastPlayerLeft() == false)
 		{
-			for(int i =0; i<playersLeft-1; i++)
+			for(int i=0; i<playersList.getPlayers().size(); i++)
 			{
-				card1Value = playersList.getCardValue(i, chosenCategory);
-				card2Value = playersList.getCardValue(i+1, chosenCategory);
-				if(card1Value > card2Value &&  card1Value >= temp)
+				if(playersList.getPlayers().get(i).getLost() == false)
 				{
-					temp = card1Value;
-					winnerOfRound = playersList.getPlayers().get(i);
-
-				}
-				else if(card1Value <card2Value && card2Value >= temp)
-				{
-					temp = card2Value;
-					winnerOfRound = playersList.getPlayers().get(i+1);
-				}
-				else if(card1Value == card2Value)
-				{
-					System.out.println("It's a draw case Card1Value " + card1Value + " Card2Value " + card2Value );
+					for(int j=i+1 ; j<playersList.getPlayers().size(); j++)
+					{
+						if(playersList.getPlayers().get(j).getLost() == false)
+						{
+							if((this.getPlayersTopCardValue(i, category) > this.getPlayersTopCardValue(j, category)) && (this.getPlayersTopCardValue(i, category)>temp))
+							{
+								temp = this.getPlayersTopCardValue(i, category);
+								winnerOfRound = playersList.getPlayers().get(i);
+							}
+							
+							else if(this.getPlayersTopCardValue(i, category) < this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(j, category)>temp)
+							{
+								temp = this.getPlayersTopCardValue(i, category);
+								winnerOfRound = playersList.getPlayers().get(j);
+							}
+							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category))
+							{
+								System.out.println("Its a draw case");
+								totalNumberOfDraws++;
+							}
+						}
+					}
 				}
 				
 			}
 		}
-		return winnerOfRound;
-		
+		winnerOfRound.incNumberOfRoundsWon();
 	}
 	
 	public void whoChooseCategory()
@@ -143,61 +148,30 @@ public class GameLogic {
 		int sizeOfList = playersList.getPlayers().size();
 		for(int i=0; i<sizeOfList; i++)
 		{
-			System.out.println("\n" + playersList.getPlayers().get(i).getName());
-			System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getTopCard());
+			if(playersList.getPlayers().get(i).getLost() == false)
+			{
+				System.out.println("\n" + playersList.getPlayers().get(i).getName());
+				System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getTopCard());
+		
+			}
 		}
 	}
 	
 	public void playRound()
 	{
 		roundWinner();
-//		whoChooseCategory();
 		System.out.println("\n"+ getWinnerOfRound() + " won the round and will choose the category of next card");
-//		System.out.println("\n All players top card");
-//		displayAllPLayersTopCard();
 	}
 	
 	public void lostPlayer()
 	{
-		int index = 0;
-		int sizeOfList = playersList.getPlayers().size(); //5
-		Players playersToRemove = new Players();
-		for(int i=0; i<sizeOfList; i++)
+		for(int i=0; i<playersList.getPlayers().size(); i++)
 		{
-			if(playersList.getPlayers().size() > 1 )
+			if(playersList.getPlayers().get(i).getPlayerDeck().getDeck().isEmpty() == true)
 			{
-				System.out.println("index " + i);
-				if(playersList.getPlayers().get(i).getPlayerDeck().getDeck().isEmpty())
-				{
-					playersList.getPlayers().get(i).getPlayerDeck().setNumOfCards(0);
-				}
-			}
-			else
-			{
-				System.out.println(playersList.getPlayers().get(i).getName() + " won the game");
-				break;
+				playersList.getPlayers().get(i).setLost(true);
 			}
 		}
-//		for(Player element: playersList.getPlayers())
-//		{
-//			if(playersToRemove.getPlayers().isEmpty() == false)
-//			{
-//				if(element.equals(playersToRemove.getPlayers().get(index)) && index < playersToRemove.getPlayers().size())
-//				{
-//					playersList.getPlayers().remove(element);
-//					index++;
-//				}
-//			}
-//		}
-			for(Player p: playersList.getPlayers())
-			{
-				if(p.getPlayerDeck().getNumberOfCards() == 0)
-				{
-					playersList.getPlayers().remove(p);
-				}
-			}
-		System.out.println(playersList.allPlayersName());
-		
 	}
 
 	public Players getPlayersList() {
@@ -212,10 +186,11 @@ public class GameLogic {
 		DeckOfCards temp = new DeckOfCards();
 		for(int i=0; i<playersListSize; i++)
 		{
-//			System.out.println("adding to temp and removing top cards i " + i);
-			temp.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
-//			System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
-			playersList.getPlayers().get(i).getPlayerDeck().getDeck().remove(0);
+			if(playersList.getPlayers().get(i).getLost() == false)
+			{
+				temp.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
+				playersList.getPlayers().get(i).getPlayerDeck().getDeck().remove(0);
+			}
 		}
 		
 		this.shuffleHand(temp);
@@ -226,8 +201,6 @@ public class GameLogic {
 			{
 				for(int j=0; j<tempSize; j++) //5
 				{
-//					System.out.println("adding to deck and removing temp i " + i + " j " +j );
-//					System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0)));
 					playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0));
 					temp.getDeck().remove(0);
 				}
@@ -247,4 +220,43 @@ public class GameLogic {
 		}
 	}
 
+	public int getTotalNumberOfDraws() {
+		return totalNumberOfDraws;
+	}
+
+	public static int getGameId() {
+		return gameId;
+	}
+	
+	public int getPlayersTopCardValue(int index,int category)
+	{
+		return this.playersList.getPlayers().get(index).getPlayerDeck().getTopCardValue(category);
+	}
+	
+	public boolean lastPlayerLeft()
+	{
+		boolean result = false; 
+		int playerCount=0;
+		for(int i=0; i<playersList.getPlayers().size(); i++)
+		{
+			if(playersList.getPlayers().get(i).getLost() == false)
+			{
+				playerCount++;
+			}
+		}
+		if(playerCount==1)
+		{
+			System.out.println("We have a winner " + winnerOfRound.getName());
+			result = true;
+		}
+		return result;
+	}
+	
+	public void displayWinnerDeck()
+	{
+		for(int i=0; i<winnerOfRound.getPlayerDeck().getDeck().size(); i++)
+		{
+			System.out.println(winnerOfRound.getPlayerDeck().getDeck().get(i).toString());
+		}
+	}
 }

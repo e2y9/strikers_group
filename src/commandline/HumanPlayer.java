@@ -6,6 +6,10 @@ public class HumanPlayer implements Player {
 
 	  private String name;
 	  private DeckOfCards playerDeck;
+	  private int playerID;
+	  private int numberOfRoundsWon = 0;
+	  private int numberOfDraws = 0;
+	  private boolean lost = false ;
 
 
 	  public HumanPlayer(String name) 
@@ -36,6 +40,7 @@ public class HumanPlayer implements Player {
 		  } catch (Exception e) {
 			  System.out.println("Please enter a number between 0 and 4.");
 		  }
+		  
 		  return catNum;
 	  }
 	
@@ -57,12 +62,41 @@ public class HumanPlayer implements Player {
 		  return name;
 	  }
 
-
-
-
 	
 	public DeckOfCards getPlayerDeck() {
 		return playerDeck;
 	}
-			
+
+
+	public int getPlayerID() {
+		return playerID;
+	}
+	
+	public void setPlayerID(int playerID) {
+		this.playerID = playerID;
+	}
+
+
+
+
+	public int getNumberOfRoundsWon() {
+		return numberOfRoundsWon;
+	}
+	
+	public void incNumberOfRoundsWon() {
+		this.numberOfRoundsWon++;
+	}
+
+	public boolean getLost() {
+		return lost;
+	}
+
+	public void setLost(boolean lost) {
+		this.lost = lost;
+	}
+	public void incNumberOfDraws()
+	{
+		numberOfDraws++;
+	}
+	
 }

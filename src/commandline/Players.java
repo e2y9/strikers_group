@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Players {
 	
 	private ArrayList<Player> players;
-	
+	private static int playerID =1;
 	public Players()
 	{
 		players = new ArrayList<Player>();
@@ -14,6 +14,7 @@ public class Players {
 	public void addPlayer(Player p)
 	{
 		players.add(p);
+		p.setPlayerID(playerID++);;
 	}
 	
 	public void removePlayer(Player p)
