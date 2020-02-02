@@ -36,12 +36,12 @@ public class TopTrumpsCLIApplication {
 //		 game.displayAllPLayersTopCard();
 		 
 		 
-		 while(game.getPlayersList().getPlayers().size()!=1)
+		 while(game.lastPlayerLeft() == false)
 		 {
 			 if(userWantsToQuit == false)
 			 {
-	//			 game.displayAllPLayersTopCard();
-				 System.out.println("GameID  " +game.getGameId());
+				 game.displayAllPLayersTopCard();
+				 System.out.println("GameID  " +GameLogic.getGameId());
 				 System.out.println("Player 1 deck");
 				 p1.getPlayerDeck().displayDeck();
 				 game.playRound();
@@ -56,7 +56,7 @@ public class TopTrumpsCLIApplication {
 			 else
 			 {
 				 System.out.println("Thank you for Playing the game.");
-				 break;
+//				 break;
 			 }
 		 }
 			
