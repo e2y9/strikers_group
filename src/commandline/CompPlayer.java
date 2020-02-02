@@ -5,6 +5,10 @@ public class CompPlayer implements Player {
 
 	 private String name;
 	 private DeckOfCards playerDeck;
+	 private int playerID;
+	 private int numberOfRoundsWon = 0;
+	 private int numberOfDraws = 0;
+	 private boolean lost = false;
 
 
 	public CompPlayer(String name) 
@@ -84,5 +88,41 @@ public class CompPlayer implements Player {
 	 public DeckOfCards getPlayerDeck() {
 			return playerDeck;
 		}
+
+
+	public int getPlayerID() {
+		return playerID;
+	}
+
+
+	public void setPlayerID(int playerID) {
+		this.playerID = playerID;
+	}
+
+
+	public int getNumberOfRoundsWon() {
+		return numberOfRoundsWon;
+	}
+
+
+	public void incNumberOfRoundsWon() {
+		this.numberOfRoundsWon++;
+	}
+
+
+	public boolean getLost() {
+		return lost;
+	}
+
+
+	public void setLost(boolean lost) {
+		this.lost = lost;
+	}
+	
+	public void incNumberOfDraws()
+	{
+		numberOfDraws++;
+	}
+	 
 }
 

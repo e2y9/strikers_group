@@ -1,5 +1,3 @@
-//Why use these methods in deck.java  1)assign roundCards 2) assign dealer cards
-
 package commandline;
 
 import java.io.FileNotFoundException;
@@ -13,6 +11,8 @@ public class GameLogic {
 	private DeckOfCards allCards;
 	private Player winnerOfRound;
 	private DeckOfCards commonPile;
+	private int totalNumberOfDraws = 0;
+	private static int gameId = 0;
 	
 
 	public GameLogic(Players players)
@@ -29,6 +29,8 @@ public class GameLogic {
 	      System.out.print("File not found.");
 	    }
 		winnerOfRound = playersList.getPlayers().get(0);
+	
+		gameId++;
 		
 	}
 	
@@ -114,11 +116,14 @@ public class GameLogic {
 				}
 				else if(card1Value == card2Value)
 				{
+					playersList.getPlayers().get(i).incNumberOfDraws();
+					totalNumberOfDraws++;
 					System.out.println("It's a draw case Card1Value " + card1Value + " Card2Value " + card2Value );
 				}
 				
 			}
 		}
+		winnerOfRound.incNumberOfRoundsWon();
 		return winnerOfRound;
 		
 	}
@@ -151,10 +156,7 @@ public class GameLogic {
 	public void playRound()
 	{
 		roundWinner();
-//		whoChooseCategory();
 		System.out.println("\n"+ getWinnerOfRound() + " won the round and will choose the category of next card");
-//		System.out.println("\n All players top card");
-//		displayAllPLayersTopCard();
 	}
 	
 	public void lostPlayer()
@@ -246,5 +248,14 @@ public class GameLogic {
 			cards.getDeck().set(i, temp);
 		}
 	}
+
+	public int getTotalNumberOfDraws() {
+		return totalNumberOfDraws;
+	}
+
+	public static int getGameId() {
+		return gameId;
+	}
+	
 
 }

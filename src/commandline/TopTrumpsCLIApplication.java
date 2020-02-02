@@ -1,6 +1,4 @@
 package commandline;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 
 public class TopTrumpsCLIApplication {
 
@@ -19,6 +17,12 @@ public class TopTrumpsCLIApplication {
 		players.addPlayer(p3);
 		players.addPlayer(p4);
 		players.addPlayer(p5);
+//		for(int i =0; i<players.getPlayers().size(); i++)
+//		{
+//			System.out.println("PLayer ID " + players.getPlayers().get(i).getPlayerID());
+//		}
+
+		
 		
 		GameLogic game = new GameLogic(players);
 		
@@ -37,12 +41,17 @@ public class TopTrumpsCLIApplication {
 			 if(userWantsToQuit == false)
 			 {
 	//			 game.displayAllPLayersTopCard();
+				 System.out.println("GameID  " +game.getGameId());
 				 System.out.println("Player 1 deck");
 				 p1.getPlayerDeck().displayDeck();
 				 game.playRound();
 				 game.transferCards();
 				 game.lostPlayer();
-				 game.displayAllPLayersTopCard();
+//				 game.displayAllPLayersTopCard();
+				 for(int i =0; i<players.getPlayers().size(); i++)
+					{
+						System.out.println("Player Name " + players.getPlayers().get(i).getName() + " won " + players.getPlayers().get(i).getNumberOfRoundsWon() + " rounds");
+					}
 			 }
 			 else
 			 {
@@ -50,6 +59,8 @@ public class TopTrumpsCLIApplication {
 				 break;
 			 }
 		 }
+			
+
 	}
 
 }
