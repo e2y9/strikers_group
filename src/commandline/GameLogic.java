@@ -19,6 +19,7 @@ public class GameLogic {
 	{
 		this.playersList = players;
 		allCards = new DeckOfCards();
+		commonPile = new DeckOfCards();
 		try
 		{
 	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\template_project\\strikers_group\\src\\commandline\\MarvelDeck.txt");
@@ -117,6 +118,7 @@ public class GameLogic {
 							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category))
 							{
 								System.out.println("Its a draw case");
+								drawCase();
 								totalNumberOfDraws++;
 							}
 						}
@@ -159,6 +161,7 @@ public class GameLogic {
 	
 	public void playRound()
 	{
+		previousDraw();
 		roundWinner();
 		System.out.println("\n"+ getWinnerOfRound() + " won the round and will choose the category of next card");
 	}
@@ -178,7 +181,6 @@ public class GameLogic {
 		return playersList;
 	}
 	
-	//I think cards need to be shuffled before adding to winners deck
 	public void transferCards()
 	{
 		int playersListSize = playersList.getPlayers().size();
@@ -257,6 +259,29 @@ public class GameLogic {
 		for(int i=0; i<winnerOfRound.getPlayerDeck().getDeck().size(); i++)
 		{
 			System.out.println(winnerOfRound.getPlayerDeck().getDeck().get(i).toString());
+		}
+	}
+	
+	public void drawCase()
+	{
+		for(int i=0; i<playersList.getPlayers().size(); i++)
+		{
+			if(playersList.getPlayers().get(i).getLost() == false)
+			{
+				commonPile.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
+			}
+		}
+	}
+	public void previousDraw()
+	{
+		if(commonPile.getDeck().isEmpty() == false)
+		{
+			transferCards();
+			
+			for(int i=0; i<commonPile.getDeck().size(); i++)
+			{
+				System.out.println(commonPile.getDeck().get(i).toString());
+			}
 		}
 	}
 }
