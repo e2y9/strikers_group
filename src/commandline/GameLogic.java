@@ -22,7 +22,7 @@ public class GameLogic {
 		commonPile = new DeckOfCards();
 		try
 		{
-	    	FileReader fr = new FileReader("C:\\Users\\Ashwin\\Documents\\Glasgow\\Master Project IT\\Emmet Repo\\strikers_group\\src\\commandline\\MarvelDeck.txt");
+	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\template_project\\strikers_group\\src\\commandline\\MarvelDeck.txt");
 	    	loadCards(fr);
 	    }
 		catch (FileNotFoundException e) 

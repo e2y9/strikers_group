@@ -1,6 +1,8 @@
 /*This method implements Player interface, Choose Category method is still incomplete*/
 package commandline;
 
+import java.util.ArrayList;
+
 public class CompPlayer implements Player {
 
 	 private String name;
@@ -89,7 +91,6 @@ public class CompPlayer implements Player {
 			return playerDeck;
 		}
 
-
 	public int getPlayerID() {
 		return playerID;
 	}
@@ -123,6 +124,4 @@ public class CompPlayer implements Player {
 	{
 		numberOfDraws++;
 	}
-	 
 }
-
