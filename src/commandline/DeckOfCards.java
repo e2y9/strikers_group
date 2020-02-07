@@ -5,15 +5,12 @@ import java.util.ArrayList;
 public class DeckOfCards {
 		
 	private ArrayList<Card> deck;
-	private int numOfCards;
 	
 	public DeckOfCards()
 	{
 		this.deck = new ArrayList<Card>();
-		numOfCards = 99;
 	}
 
-	
 	public void displayDeck()
 	{ int i = 0;
 		for(Card element:deck)
@@ -50,16 +47,5 @@ public class DeckOfCards {
 	public int getNumberOfCards()
 	{
 		return deck.size();
-	}
-
-
-	public int getNumOfCards() {
-		return numOfCards;
-	}
-
-
-	public void setNumOfCards(int numOfCards) {
-		this.numOfCards = numOfCards;
-	}
-	
+	}	
 }
