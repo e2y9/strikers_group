@@ -65,34 +65,6 @@ public class Card {
 	  public int getCombat() {
 	    return this.cardValues[4];
 	  }
-	  
-	  public String getCategoryIntelligence() {
-	    return this.cardCategories[0];
-	  }
 
-	  public String getCategorySpeed() {
-	    return this.cardCategories[1];
-	  }
-
-	  public String getCategoryStrength() {
-	    return this.cardCategories[2];
-	  }
-
-	  public String getCategoryAgility() {
-	    return this.cardCategories[3];
-	  }
-
-	  public String getCategoryCombat() {
-	    return this.cardCategories[4];
-	  }
-
-	  public String[] getCategories() {
-	    return cardCategories;
-	  }
-
-	  public int[] getValues() {
-	    return cardValues;
-	  }
-
-	}
+}
 

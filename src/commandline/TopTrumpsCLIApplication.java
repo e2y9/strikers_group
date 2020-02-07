@@ -1,42 +1,51 @@
 package commandline;
 
+import java.util.Scanner;
+
 public class TopTrumpsCLIApplication {
 
 	public static void main(String[] args) {
 		boolean userWantsToQuit = false;
+		int choice = 0;
 		
-		Players players = new Players();
-		Player p1 = new HumanPlayer("Ashwin");
-		Player p2 = new CompPlayer("AI 1");
-		Player p3 = new CompPlayer("AI 2");
-		Player p4 = new CompPlayer("AI 3");
-		Player p5 = new CompPlayer("AI 4");
-
-		players.addPlayer(p1);
-		players.addPlayer(p2);
-		players.addPlayer(p3);
-		players.addPlayer(p4);
-		players.addPlayer(p5);
 		
-		GameLogic game = new GameLogic(players);
+		GameLogic game = new GameLogic(4);
+		Scanner s = new Scanner(System.in);
 		
-		System.out.print("Welcome to Top Trumps!\n");
-		game.shuffleDeck();
-		game.dealDeck();
 		
-		 while(game.lastPlayerLeft() == false)
-		 {
-			 if(userWantsToQuit == false)
-			 {
-				 game.playRound();
-				 game.transferCards();
-				 game.lostPlayer();
-			 }
-			 else
-			 {
-				 System.out.println("Thank you for Playing the game.");
-			 }
-		 }
-
-	}
+		 System.out.print("Welcome to Top Trumps!\n");
+		 
+		 game.shuffleDeck();
+		 game.dealDeck();
+//		 
+//		 try {
+//			 System.out.println("Press 1 to Start Game\nPress 2 to Show Statistics");
+//			 choice = s.nextInt();
+//			 if(choice==1)
+//			 {
+				 while(game.lastPlayerLeft() == false)
+				 {
+					 if(userWantsToQuit == false)
+					 {
+//						 game.getPlayersList().getPlayers().get(0).getPlayerDeck().displayDeck();
+						 game.displayAllPLayersTopCard();
+						 game.playRound();
+//						 game.displayAllPLayersTopCard();
+					 }
+					 else
+					 {
+						 System.out.println("Thank you for Playing the game.");
+					 }
+				 }
+			}
+//			 else if(choice == 2)
+//			 {
+//				 System.out.println("In stats");
+//			 }
+//			 
+//		  } catch (Exception e) {
+//			  System.out.println("Please enter 1 or 2.");
+//		 
+//		  }
+//	}
 }

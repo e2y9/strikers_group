@@ -1,7 +1,5 @@
-/*This method implements Player interface, Choose Category method is still incomplete*/
 package commandline;
 
-import java.util.ArrayList;
 
 public class CompPlayer implements Player {
 
@@ -18,12 +16,10 @@ public class CompPlayer implements Player {
 		  this.name = name;
 		  playerDeck = new DeckOfCards();
 	  }
-	
 
 	  public String getName() {
 		  return name;
 	  }
-
 
 	@Override
 	public int chooseCategory()
@@ -95,26 +91,21 @@ public class CompPlayer implements Player {
 		return playerID;
 	}
 
-
 	public void setPlayerID(int playerID) {
 		this.playerID = playerID;
 	}
-
 
 	public int getNumberOfRoundsWon() {
 		return numberOfRoundsWon;
 	}
 
-
 	public void incNumberOfRoundsWon() {
 		this.numberOfRoundsWon++;
 	}
 
-
 	public boolean getLost() {
 		return lost;
 	}
-
 
 	public void setLost(boolean lost) {
 		this.lost = lost;

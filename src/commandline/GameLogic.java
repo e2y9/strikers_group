@@ -2,6 +2,7 @@ package commandline;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,25 +14,36 @@ public class GameLogic {
 	private DeckOfCards commonPile;
 	private int totalNumberOfDraws = 0;
 	private static int gameId = 0;
-	
+	private int numOfPlayers;
+	private int totalNumberOfRounds=0;
+	private Card winnerCard;
+	private boolean draw = false;
 
-	public GameLogic(Players players)
+	public GameLogic(int numOfPlayers)
 	{
-		this.playersList = players;
+		this.numOfPlayers = numOfPlayers;
+		playersList = new Players();
 		allCards = new DeckOfCards();
 		commonPile = new DeckOfCards();
 		try
 		{
-	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\template_project\\strikers_group\\src\\commandline\\MarvelDeck.txt");
+	    	FileReader fr = new FileReader("C:\\Users\\Ashwin\\Documents\\Glasgow\\Master Project IT\\Emmet Repo\\strikers_group\\src\\commandline\\MarvelDeck.txt");
 	    	loadCards(fr);
 	    }
 		catch (FileNotFoundException e) 
 		{
 	      System.out.print("File not found.");
 	    }
-		winnerOfRound = playersList.getPlayers().get(0);
+
 	
 		gameId++;
+		playersList.addPlayer(new HumanPlayer("Human Player"));		
+		winnerOfRound = playersList.getPlayers().get(0);
+		for(int i=1; i<numOfPlayers; i++)
+		{
+			String name = "AI "+ i;
+			playersList.addPlayer(new CompPlayer(name));
+		}
 		
 	}
 	
@@ -76,8 +88,6 @@ public class GameLogic {
 		
 	}
 	
-	
-	//Might throw a null pointer exception
 	public void shuffleDeck()
 	{
 		Random randomInteger = new Random();
@@ -108,15 +118,25 @@ public class GameLogic {
 							{
 								temp = this.getPlayersTopCardValue(i, category);
 								winnerOfRound = playersList.getPlayers().get(i);
+								if(commonPile.getDeck().isEmpty() == false)
+								{
+									addFromCommonPile(i);
+								}
+								
 							}
 							
 							else if(this.getPlayersTopCardValue(i, category) < this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(j, category)>temp)
 							{
 								temp = this.getPlayersTopCardValue(i, category);
 								winnerOfRound = playersList.getPlayers().get(j);
+								if(commonPile.getDeck().isEmpty() == false)
+								{
+									addFromCommonPile(i);
+								}
 							}
 							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category))
 							{
+								draw = true;
 								System.out.println("Its a draw case");
 								drawCase();
 								totalNumberOfDraws++;
@@ -128,6 +148,7 @@ public class GameLogic {
 			}
 		}
 		winnerOfRound.incNumberOfRoundsWon();
+		this.incrementTotalNumberOfRounds();
 	}
 	
 	public void whoChooseCategory()
@@ -164,6 +185,11 @@ public class GameLogic {
 		previousDraw();
 		roundWinner();
 		System.out.println("\n"+ getWinnerOfRound() + " won the round and will choose the category of next card");
+		if(draw == false)
+		{
+			transferCards();
+		}
+		 lostPlayer();
 	}
 	
 	public void lostPlayer()
@@ -183,6 +209,7 @@ public class GameLogic {
 	
 	public void transferCards()
 	{
+		winnerCard =  winnerOfRound.getPlayerDeck().getDeck().get(0);
 		int playersListSize = playersList.getPlayers().size();
 		int tempSize =0;
 		DeckOfCards temp = new DeckOfCards();
@@ -271,6 +298,14 @@ public class GameLogic {
 				commonPile.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
 			}
 		}
+		for(int i=0; i<playersList.getPlayers().size(); i++)
+		{
+			if(playersList.getPlayers().get(i).getLost() == false)
+			{
+				playersList.getPlayers().get(i).getPlayerDeck().getDeck().remove(0);
+			}
+		}
+		
 	}
 	public void previousDraw()
 	{
@@ -282,6 +317,63 @@ public class GameLogic {
 			{
 				System.out.println(commonPile.getDeck().get(i).toString());
 			}
+		}
+	}
+	public void incrementTotalNumberOfRounds()
+	{
+		totalNumberOfRounds++;
+	}
+	
+	public ArrayList<String> getWinnerAttribute()
+	{
+		ArrayList<String> result = new ArrayList<String>(); 
+		
+		if(draw == false)
+		{
+			result.add(winnerOfRound.getName());
+			result.add(winnerCard.getName());
+			result.add(Integer.toString(winnerCard.getIntelligence()));
+			result.add(Integer.toString(winnerCard.getSpeed()));
+			result.add(Integer.toString(winnerCard.getStrength()));
+			result.add(Integer.toString(winnerCard.getAgility()));
+			result.add(Integer.toString(winnerCard.getCombat()));
+		}
+		
+		
+		return result;
+	}
+	
+	public ArrayList<String> getHumanPlayerTopCardAttributes()
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		if(playersList.getPlayers().get(0).getLost() == false)
+		{
+			result.add(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getName());
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getIntelligence()));
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getSpeed()));
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getStrength()));
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getAgility()));
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getCombat()));
+		}
+		
+		return result;
+	}
+	public ArrayList<Integer> getNumberOfCards()
+	{
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for(int i=0; i<playersList.getPlayers().size(); i++)	
+		{
+			result.add(playersList.getPlayers().get(i).getPlayerDeck().getNumberOfCards());
+		}
+		return result;				
+	}
+	
+	public void addFromCommonPile(int playerIndex)
+	{
+		this.shuffleHand(commonPile);
+		for(int k=0; k<commonPile.getDeck().size(); k++)
+		{
+			playersList.getPlayers().get(playerIndex).getPlayerDeck().addCard(commonPile.getDeck().get(k));
 		}
 	}
 }
